@@ -1,14 +1,11 @@
-title: "TryHackMe CTF"
-description: "Professional CTF documentation."
-
-theme: jekyll-theme-primer
-
+title: "After Hours — TryHackMe"
+description: "Hacker Holidays 2026 Day 12 — professional forensic investigation documentation."
+theme: jekyll-theme-hacker
+markdown: kramdown
 plugins:
   - jekyll-relative-links
-
 relative_links:
   enabled: true
   collections: true
-
 include:
   - docs
