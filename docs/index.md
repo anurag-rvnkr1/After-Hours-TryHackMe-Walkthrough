@@ -1,10 +1,3 @@
----
-layout: default
-title: "🌙 After Hours — Windows DFIR Investigation"
-description: "Professional TryHackMe Hacker Holidays 2026 Day 12 digital forensics and malware analysis case study by Anurag Ravikumar."
-permalink: /
----
-
 <div align="center">
 
 # 🌙 AFTER HOURS
