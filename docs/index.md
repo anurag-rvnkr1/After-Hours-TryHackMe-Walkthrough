@@ -1,593 +1,337 @@
-<div align="center">
 
-# 🌙 AFTER HOURS
+---
+layout: default
+title: "After Hours — Windows DFIR & Malware Analysis"
+description: "A TryHackMe Windows digital forensics investigation covering PowerShell threat hunting, WMI configuration analysis, encoded payload recovery, PE validation, .NET reverse engineering, and defensive detection engineering."
+category: "Digital Forensics & Incident Response"
+tags:
+  - TryHackMe
+  - Windows-DFIR
+  - PowerShell
+  - WMI
+  - Malware-Analysis
+  - Reverse-Engineering
+  - Threat-Hunting
+  - Blue-Team
+---
 
-## Windows Digital Forensics & Malware Analysis Investigation
+<div class="ctf-hero">
 
-### TryHackMe • Hacker Holidays 2026 • Day 12
+  <h1>AFTER HOURS</h1>
 
-<img src="assets/01_room-overview.png" width="100%" alt="After Hours Banner"/>
+  <p>
+    Windows Digital Forensics, Malware Analysis, and Reverse Engineering.
+    Investigate suspicious after-hours activity, recover a concealed .NET
+    executable from forensic artifacts, reconstruct its behavior, and develop
+    defensive hunting opportunities without executing the recovered malware.
+  </p>
 
-<br>
-
-![TryHackMe](https://img.shields.io/badge/TryHackMe-After_Hours-red?style=for-the-badge\&logo=tryhackme)
-![DFIR](https://img.shields.io/badge/Digital_Forensics-Incident_Response-blue?style=for-the-badge)
-![Malware Analysis](https://img.shields.io/badge/Malware-Static_Analysis-success?style=for-the-badge)
-![Windows](https://img.shields.io/badge/Windows-WMI_Investigation-0078D6?style=for-the-badge\&logo=windows)
-![ILSpy](https://img.shields.io/badge/.NET-Reverse_Engineering-purple?style=for-the-badge)
-![GitHub Pages](https://img.shields.io/badge/GitHub_Pages-Portfolio-black?style=for-the-badge\&logo=github)
-
-
-
-### 🔍 A Complete DFIR Investigation Into Hidden Windows Persistence
-
-*PowerShell Threat Hunting • WMI Persistence • Base64 & Deflate Analysis • PE Recovery • ILSpy Reverse Engineering*
+  <div class="ctf-badges">
+    <span class="ctf-badge">TryHackMe</span>
+    <span class="ctf-badge">Hacker Holidays 2026</span>
+    <span class="ctf-badge">Day 12</span>
+    <span class="ctf-badge">Windows DFIR</span>
+    <span class="ctf-badge">Malware Analysis</span>
+    <span class="ctf-badge">.NET Reverse Engineering</span>
+    <span class="ctf-badge">Blue Team</span>
+  </div>
 
 </div>
 
----
-
-# 👨‍💻 About This Investigation
-
-> [!NOTE]
-> This repository documents a **complete Digital Forensics & Malware Analysis investigation** performed in the **After Hours** TryHackMe room from **Hacker Holidays 2026**.
->
-> Rather than exploiting a vulnerable target, this challenge focuses on investigating Windows forensic artifacts, uncovering hidden persistence mechanisms, decoding malicious PowerShell payloads, recovering a concealed .NET executable, and reverse engineering attacker behavior without executing malware.
-
-The investigation follows a realistic **SOC / DFIR analyst workflow**, documenting every phase from evidence acquisition to defensive recommendations.
-
----
-
-# 🚨 Threat Briefing
-
-<table>
-<tr><td width="220"><strong>Scenario</strong></td><td>Suspicious Windows persistence after business hours.</td></tr>
-<tr><td><strong>Attack Style</strong></td><td>PowerShell Loader + WMI Configuration Abuse.</td></tr>
-<tr><td><strong>Category</strong></td><td>Digital Forensics & Malware Analysis.</td></tr>
-<tr><td><strong>Objective</strong></td><td>Recover malicious payload without executing malware.</td></tr>
-<tr><td><strong>Analysis Method</strong></td><td>Static Forensics + Reverse Engineering.</td></tr>
-<tr><td><strong>Status</strong></td><td>Investigation Completed ✅</td></tr>
-</table>
-
----
-
-# ⚡ Investigation Dashboard
-
-<table>
-<tr>
-<td align="center" width="33%">
-
-## 🧪 Category
-
-**Windows DFIR**
-
-PowerShell • WMI • Malware Analysis
-
-</td>
-
-<td align="center" width="33%">
-
-## 🎯 Difficulty
-
-**Medium**
-
-Static Investigation
-
-</td>
-
-<td align="center" width="33%">
-
-## 🛡 Focus
-
-**Blue Team**
-
-Incident Response Workflow
-
-</td>
-</tr>
-</table>
-
----
-
-## 🧰 Technologies Used
-
-<table>
-<tr>
-<td align="center">🪟 Windows</td>
-<td align="center">💻 PowerShell</td>
-<td align="center">📁 WMI</td>
-<td align="center">🍳 CyberChef</td>
-</tr>
-
-<tr>
-<td align="center">🧬 ILSpy</td>
-<td align="center">📦 Deflate</td>
-<td align="center">🔐 Base64</td>
-<td align="center">📄 PE Analysis</td>
-</tr>
-
-<tr>
-<td align="center">🐧 Linux CLI</td>
-<td align="center">🧾 Strings</td>
-<td align="center">🔍 Grep</td>
-<td align="center">🛡 DFIR</td>
-</tr>
-</table>
-
----
-
-# 📚 Skills Demonstrated
-
-<table>
-<tr><td width="240"><strong>Windows Forensics</strong></td><td>Evidence collection, artifact parsing, WMI persistence hunting.</td></tr>
-
-<tr><td><strong>PowerShell Analysis</strong></td><td>Encoded command recovery and safe offline decoding.</td></tr>
-
-<tr><td><strong>Malware Analysis</strong></td><td>Payload extraction, PE validation, malware behavior reconstruction.</td></tr>
-
-<tr><td><strong>Reverse Engineering</strong></td><td>Static .NET executable analysis using ILSpy.</td></tr>
-
-<tr><td><strong>Threat Hunting</strong></td><td>IOC extraction, Sigma concepts, Sysmon hunting opportunities.</td></tr>
-
-<tr><td><strong>Incident Documentation</strong></td><td>Professional DFIR report suitable for cybersecurity portfolio.</td></tr>
-</table>
-
----
-
-# 🗺 Navigation
-
-<table>
-<tr>
-<td align="center" width="33%">
-
-## 📘 Full Report
-
-**Documentation**
-
-`Documentation/Documentation.md`
-
-Complete 6,000-word forensic report.
-
-</td>
-
-<td align="center" width="33%">
-
-## 📝 Analyst Notes
-
-**Quick Notes**
-
-`Resources/notes.md`
-
-Commands, observations, and IOC notebook.
-
-</td>
-
-<td align="center" width="33%">
-
-## 📄 GitHub README
-
-**Repository Overview**
-
-`README.md`
-
-Project landing page.
-
-</td>
-</tr>
-</table>
-
----
-
-# 🎯 Investigation Objectives
-
-The investigation was performed with four primary objectives.
-
-<table>
-<tr><th width="60">Phase</th><th>Objective</th></tr>
-
-<tr>
-<td align="center">1️⃣</td>
-<td>Identify hidden Windows persistence artifacts inside supplied forensic evidence.</td>
-</tr>
-
-<tr>
-<td align="center">2️⃣</td>
-<td>Recover and decode malicious PowerShell execution logic safely.</td>
-</tr>
-
-<tr>
-<td align="center">3️⃣</td>
-<td>Extract an embedded executable payload stored inside Windows Management Instrumentation.</td>
-</tr>
-
-<tr>
-<td align="center">4️⃣</td>
-<td>Reverse engineer malware behavior using static analysis techniques.</td>
-</tr>
-
-</table>
-
----
-
-# 🧠 Executive Summary
-
-> [!TIP]
-> This room simulates a compromised Windows endpoint where persistence has been deliberately hidden outside common startup locations.
-
-Traditional persistence locations appeared clean:
-
-* Registry Run Keys.
-* Startup Folder.
-* Scheduled Tasks.
-* Services.
-
-Despite that, suspicious activity continued occurring **after business hours**.
-
-The investigation uncovered:
-
-<table>
-<tr><td width="260"><strong>Hidden PowerShell Loader</strong></td><td>Encoded PowerShell executed through `cmd.exe`.</td></tr>
-
-<tr><td><strong>WMI Configuration Storage</strong></td><td>Malicious payload hidden inside Windows Management Instrumentation.</td></tr>
-
-<tr><td><strong>Base64 + Deflate Payload</strong></td><td>Compressed executable embedded inside configuration data.</td></tr>
-
-<tr><td><strong>Portable Executable Recovery</strong></td><td>Recovered Windows PE without executing malware.</td></tr>
-
-<tr><td><strong>.NET Reverse Engineering</strong></td><td>ILSpy reconstructed malware execution logic.</td></tr>
-
-<tr><td><strong>Incident Documentation</strong></td><td>Complete IOC and defensive analysis produced.</td></tr>
-</table>
-
----
-
-# 📈 Investigation Timeline
-
-The investigation followed a structured Digital Forensics workflow.
-
-```text
-Evidence Acquisition
-        │
-        ▼
-Artifact Enumeration
-        │
-        ▼
-PowerShell Discovery
-        │
-        ▼
-CyberChef Decoding
-        │
-        ▼
-Payload Extraction
-        │
-        ▼
-PE Validation
-        │
-        ▼
-ILSpy Reverse Engineering
-        │
-        ▼
-IOC Documentation
-        │
-        ▼
-Detection Engineering
-```
-
----
-
-# 🕓 Incident Timeline
-
-<table>
-<tr><th width="140">Time</th><th>Investigation Activity</th></tr>
-
-<tr>
-<td>🟢 T+00</td>
-<td>Evidence package extracted inside TryHackMe AttackBox.</td>
-</tr>
-
-<tr>
-<td>🟢 T+05</td>
-<td>Windows forensic artifacts enumerated using Linux utilities.</td>
-</tr>
-
-<tr>
-<td>🟢 T+10</td>
-<td>Suspicious PowerShell execution chain identified.</td>
-</tr>
-
-<tr>
-<td>🟡 T+20</td>
-<td>Encoded Base64 PowerShell payload decoded safely in CyberChef.</td>
-</tr>
-
-<tr>
-<td>🟡 T+30</td>
-<td>Hidden WMI configuration property recovered.</td>
-</tr>
-
-<tr>
-<td>🟠 T+40</td>
-<td>Compressed executable extracted through Raw Inflate.</td>
-</tr>
-
-<tr>
-<td>🟠 T+50</td>
-<td>Portable Executable validated and preserved.</td>
-</tr>
-
-<tr>
-<td>🔴 T+60</td>
-<td>.NET malware statically analyzed using ILSpy.</td>
-</tr>
-
-<tr>
-<td>🔴 T+70</td>
-<td>Indicators of Compromise documented.</td>
-</tr>
-
-<tr>
-<td>✅ Final</td>
-<td>Complete DFIR investigation report published.</td>
-</tr>
-
-</table>
-
----
-
-# 💻 Lab Environment
-
-<table>
-<tr><td width="220"><strong>Investigation Platform</strong></td><td>TryHackMe AttackBox</td></tr>
-
-<tr><td><strong>Operating System</strong></td><td>Linux Investigation Environment</td></tr>
-
-<tr><td><strong>Target Platform</strong></td><td>Windows Forensic Artifacts</td></tr>
-
-<tr><td><strong>Malware Type</strong></td><td>.NET Portable Executable</td></tr>
-
-<tr><td><strong>Investigation Style</strong></td><td>Static Malware Analysis</td></tr>
-
-<tr><td><strong>Execution</strong></td><td>None (Offline Analysis)</td></tr>
-</table>
-
----
-
-# 🗂 Investigation Workspace
-
-<img src="assets/02_workspace-access.png" width="100%" alt="AttackBox Workspace"/>
-
-**Figure 1.** Investigation workspace prepared inside the TryHackMe AttackBox environment.
-
-The workspace contains:
-
-* Challenge archive.
-* Forensic artifacts.
-* Investigation tools.
-* ILSpy binaries.
-* Malware sample components.
-
----
-
-# 📁 Evidence Acquisition
-
-> [!IMPORTANT]
-> All investigation work was performed on extracted forensic artifacts while preserving original evidence integrity.
-
-### Evidence Directory
+# Mission
+
+This portfolio report documents the investigation of the **After Hours** TryHackMe room from Hacker Holidays 2026, Day 12.
+
+The scenario centers on suspicious Windows activity occurring after business hours. The investigation examines forensic artifacts for encoded PowerShell execution, investigates a suspicious WMI-related configuration property, recovers compressed executable content, validates the recovered Portable Executable (PE), and analyzes its managed .NET code using ILSpy.
+
+The investigation follows a static-first Digital Forensics and Incident Response (DFIR) workflow. The recovered executable was not intentionally executed during the documented analysis.
+
+<div class="key-finding">
+  <div class="key-finding-title">Primary Investigation Finding</div>
+
+  The documented artifact trail links encoded PowerShell, WMI-related configuration data, a Base64-encoded and compressed payload, a recovered Windows executable, and a .NET assembly examined through static reverse engineering.
+</div>
+
+## Quick Overview
+
+<div class="ctf-card-grid">
+
+  <div class="ctf-card">
+    <div class="ctf-card-title">Platform</div>
+    <div class="ctf-card-value">TryHackMe</div>
+  </div>
+
+  <div class="ctf-card">
+    <div class="ctf-card-title">Challenge</div>
+    <div class="ctf-card-value">After Hours</div>
+  </div>
+
+  <div class="ctf-card">
+    <div class="ctf-card-title">Environment</div>
+    <div class="ctf-card-value">Linux AttackBox / Windows artifacts</div>
+  </div>
+
+  <div class="ctf-card">
+    <div class="ctf-card-title">Primary Focus</div>
+    <div class="ctf-card-value">DFIR and static malware analysis</div>
+  </div>
+
+  <div class="ctf-card">
+    <div class="ctf-card-title">Analysis Tools</div>
+    <div class="ctf-card-value">CyberChef, ILSpy, Linux CLI</div>
+  </div>
+
+  <div class="ctf-card">
+    <div class="ctf-card-title">Analysis Status</div>
+    <div class="ctf-card-value">Investigation documented</div>
+  </div>
+
+</div>
+
+## Investigation at a Glance
+
+| Area | Documented activity |
+|---|---|
+| Evidence acquisition | Extracted the supplied challenge artifacts |
+| Artifact triage | Enumerated printable strings |
+| Threat hunting | Searched for PowerShell and WMI-related indicators |
+| Script analysis | Decoded Base64 content and removed null bytes |
+| Configuration analysis | Investigated a property associated with `Win32_HardwareTelemetry` |
+| Payload recovery | Applied Base64 decoding and Raw Inflate |
+| File validation | Identified Windows PE and managed .NET indicators |
+| Reverse engineering | Inspected assembly structure and `Main()` using ILSpy |
+| Detection engineering | Documented Sigma concepts and Sysmon hunting opportunities |
+| Reporting | Recorded indicators, analysis steps, ATT&CK mappings, and defensive recommendations |
+
+## Navigation
+
+<div class="ctf-toc">
+
+<div class="ctf-toc-title">Documentation Map</div>
+
+- [Mission](#mission)
+- [Quick Overview](#quick-overview)
+- [Investigation Objectives](#investigation-objectives)
+- [Scope and Safe Analysis](#scope-and-safe-analysis)
+- [Lab Environment](#lab-environment)
+- [Tools and Technologies](#tools-and-technologies)
+- [Investigation Methodology](#investigation-methodology)
+- [Investigation Timeline](#investigation-timeline)
+- [Evidence Acquisition](#evidence-acquisition)
+- [Artifact Enumeration](#artifact-enumeration)
+- [PowerShell Threat Hunting](#powershell-threat-hunting)
+- [PowerShell Loader Analysis](#powershell-loader-analysis)
+- [WMI Configuration Investigation](#wmi-configuration-investigation)
+- [Embedded Payload Recovery](#embedded-payload-recovery)
+- [PE Validation and Evidence Preservation](#pe-validation-and-evidence-preservation)
+- [.NET Reverse Engineering](#net-reverse-engineering)
+- [Malware Execution-Flow Reconstruction](#malware-execution-flow-reconstruction)
+- [Indicators of Compromise](#indicators-of-compromise)
+- [MITRE ATT&CK Mapping](#mitre-attck-mapping)
+- [Detection Engineering](#detection-engineering)
+- [Sysmon Hunting Opportunities](#sysmon-hunting-opportunities)
+- [Investigation Evidence Gallery](#investigation-evidence-gallery)
+- [Key Findings](#key-findings)
+- [Defensive Recommendations](#defensive-recommendations)
+- [Investigation Summary](#investigation-summary)
+- [Lessons Learned](#lessons-learned)
+- [Repository Documentation](#repository-documentation)
+- [Related Portfolio Projects](#related-portfolio-projects)
+- [References and Learning Resources](#references-and-learning-resources)
+- [Responsible Use](#responsible-use)
+- [Conclusion](#conclusion)
+
+</div>
+
+# Investigation Objectives
+
+The investigation had four primary objectives:
+
+1. Identify suspicious Windows persistence-related artifacts in the supplied forensic evidence.
+2. Recover and decode the malicious PowerShell execution logic without running the recovered malware.
+3. Extract the embedded executable associated with WMI-related configuration data.
+4. Reconstruct the recovered .NET executable's behavior through static analysis.
+
+The broader learning objectives were to practice Windows artifact triage, PowerShell analysis, payload recovery, PE identification, reverse engineering, indicator documentation, and defensive threat hunting.
+
+# Scope and Safe Analysis
+
+The investigation was conducted within the TryHackMe training environment using supplied forensic artifacts.
+
+The documented analysis covered:
+
+- Printable-string extraction from challenge artifacts.
+- Identification of suspicious PowerShell command-line indicators.
+- Offline decoding of encoded script content.
+- Inspection of WMI-related configuration references.
+- Base64 decoding and decompression of embedded binary data.
+- Identification of Windows executable and .NET metadata.
+- Static analysis of the recovered assembly using ILSpy.
+- Documentation of sanitized indicators and defensive detection opportunities.
+
+The original report states that malware execution was not performed.
+
+The available documentation does not provide a target IP address, hostname, domain, listening-port inventory, or a verified executable hash. These values are therefore not supplied here.
+
+# Lab Environment
+
+| Property | Documented value |
+|---|---|
+| Training platform | TryHackMe |
+| Room | After Hours |
+| Event | Hacker Holidays 2026 |
+| Event day | Day 12 |
+| Investigation environment | TryHackMe AttackBox |
+| Analysis operating environment | Linux investigation environment |
+| Evidence under investigation | Windows forensic artifacts |
+| Recovered file type | Windows Portable Executable |
+| Managed-code analysis | .NET assembly inspected using ILSpy |
+| Analysis approach | Static analysis |
+| Malware execution | Not performed during the documented investigation |
+
+## Investigation Workspace
+
+<figure>
+  <img src="assets/02_workspace-access.png" alt="TryHackMe AttackBox investigation workspace">
+  <figcaption>Figure 1. Investigation workspace prepared inside the TryHackMe AttackBox environment.</figcaption>
+</figure>
+
+The documented workspace contains the challenge archive, forensic artifacts, investigation utilities, ILSpy binaries, and components used during payload recovery.
+
+# Tools and Technologies
+
+The following tools and technologies are identified in the original investigation.
+
+| Tool or technology | Documented purpose |
+|---|---|
+| Linux command-line utilities | Artifact inspection and string extraction |
+| `strings` | Extract printable content from evidence files |
+| `grep` | Search extracted strings for suspicious references |
+| `sort` | Organize and deduplicate search results |
+| CyberChef | Decode Base64 data, remove null bytes, and decompress the payload |
+| ILSpy | Inspect and decompile the recovered managed .NET assembly |
+| PowerShell | Analyze the recovered loader's execution logic |
+| Windows Management Instrumentation (WMI) | Investigate the configuration reference associated with the encoded payload |
+| Base64 | Decode encoded script and binary content |
+| Deflate / Raw Inflate | Recover compressed binary content |
+| PE format | Identify the recovered Windows executable |
+| Sigma | Document illustrative detection concepts |
+| Sysmon | Identify potential Windows telemetry for hunting |
+
+# Investigation Methodology
+
+The investigation followed a static-first forensic workflow.
+
+<div class="attack-chain">
+  <div class="attack-step">Evidence Acquisition</div>
+  <div class="attack-arrow">→</div>
+  <div class="attack-step">Artifact Triage</div>
+  <div class="attack-arrow">→</div>
+  <div class="attack-step">PowerShell Hunting</div>
+  <div class="attack-arrow">→</div>
+  <div class="attack-step">Offline Decoding</div>
+  <div class="attack-arrow">→</div>
+  <div class="attack-step">Payload Recovery</div>
+  <div class="attack-arrow">→</div>
+  <div class="attack-step">PE Validation</div>
+  <div class="attack-arrow">→</div>
+  <div class="attack-step">ILSpy Analysis</div>
+  <div class="attack-arrow">→</div>
+  <div class="attack-step">Defensive Reporting</div>
+</div>
+
+The process begins with evidence collection and broad artifact enumeration rather than executing unknown files. Suspicious script content is decoded offline, the associated binary is recovered, and the resulting assembly is examined statically.
+
+This approach supports behavior reconstruction while reducing the risk of unintentionally activating the sample.
+
+# Investigation Timeline
+
+The following is the relative sequence recorded in the original report. The `T+` values are the documented investigation timeline, not independently verified incident timestamps.
+
+| Relative time | Investigation activity |
+|---|---|
+| T+00 | Evidence package extracted inside the TryHackMe AttackBox |
+| T+05 | Windows forensic artifacts enumerated using Linux utilities |
+| T+10 | Suspicious PowerShell execution chain identified |
+| T+20 | Encoded PowerShell payload decoded using CyberChef |
+| T+30 | WMI-related configuration property investigated |
+| T+40 | Compressed executable content recovered through Raw Inflate |
+| T+50 | Portable Executable format validated |
+| T+60 | Recovered .NET sample examined statically using ILSpy |
+| T+70 | Indicators of Compromise documented |
+| Final | DFIR investigation report prepared |
+
+# Evidence Acquisition
+
+The original investigation records the following working directory:
 
 ```bash
 /root/Rooms/hacker-holidays-2026/after-hours/
 ```
 
----
+## Initial Evidence Inventory
 
-## Initial Evidence Collection
+| Artifact | Documented purpose |
+|---|---|
+| `mappings` | Windows configuration mapping information |
+| `index` | Metadata and lookup references for stored configuration objects |
+| `objects.data` | Primary artifact containing encoded configuration data |
+| `tools/` | Investigation utilities, including ILSpy |
 
-<table>
-<tr><th width="220">Artifact</th><th>Description</th></tr>
+<figure>
+  <img src="assets/03_artifact-inventory.png" alt="Initial forensic artifact inventory">
+  <figcaption>Figure 2. Initial forensic artifact inventory after extracting the challenge package.</figcaption>
+</figure>
 
-<tr>
-<td><code>mappings</code></td>
-<td>Windows configuration mapping artifact.</td>
-</tr>
+The investigation treats `objects.data` as the primary artifact of interest because the original report associates it with encoded configuration content.
 
-<tr>
-<td><code>index</code></td>
-<td>Metadata and lookup references.</td>
-</tr>
+Evidence preservation remains important throughout the process. Original artifacts should remain unchanged, and recovered files should be stored separately for examination.
 
-<tr>
-<td><code>objects.data</code></td>
-<td>Hidden configuration storage containing encoded payload.</td>
-</tr>
+# Artifact Enumeration
 
-<tr>
-<td><code>tools/</code></td>
-<td>Reverse engineering utilities including ILSpy.</td>
-</tr>
+## Extracting Printable Strings
 
-</table>
-
----
-
-<img src="assets/03_artifact-inventory.png" width="100%" alt="Artifact Inventory"/>
-
-**Figure 2.** Initial forensic artifact inventory after extracting the evidence package.
-
----
-
-# 🔬 Investigation Methodology
-
-This investigation follows a realistic Digital Forensics workflow instead of executing malware.
-
-<table>
-<tr><th width="180">Phase</th><th>Purpose</th></tr>
-
-<tr>
-<td>Evidence Collection</td>
-<td>Acquire artifacts safely.</td>
-</tr>
-
-<tr>
-<td>Artifact Enumeration</td>
-<td>Extract printable strings and suspicious references.</td>
-</tr>
-
-<tr>
-<td>Threat Hunting</td>
-<td>Locate encoded PowerShell activity.</td>
-</tr>
-
-<tr>
-<td>Payload Recovery</td>
-<td>Decode embedded executable.</td>
-</tr>
-
-<tr>
-<td>Reverse Engineering</td>
-<td>Understand malware behavior.</td>
-</tr>
-
-<tr>
-<td>Documentation</td>
-<td>Create IOC timeline and defensive recommendations.</td>
-</tr>
-
-</table>
-
----
-
-# 🛡 Why This Investigation Matters
-
-> [!NOTE]
-> Modern Windows malware increasingly avoids obvious persistence mechanisms.
-
-Instead it may leverage:
-
-* Windows Management Instrumentation.
-* Encoded PowerShell.
-* Memory-only payload loading.
-* Compressed configuration blobs.
-* Managed .NET assemblies.
-
-Understanding these behaviors is an essential skill for:
-
-* SOC Analysts.
-* DFIR Analysts.
-* Incident Responders.
-* Malware Analysts.
-* Blue Team Engineers.
-
----
-
-</div>
-
----
-
-<div align="center">
-
-# 🔍 Phase 2 — Windows Artifact Investigation
-
-### Threat Hunting • PowerShell Analysis • WMI Persistence Discovery
-
-</div>
-
-> [!IMPORTANT]
-> The objective of this phase is to investigate Windows forensic artifacts **without executing malware**, preserving evidence integrity throughout the investigation.
-
----
-
-# 📁 Evidence Enumeration
-
-The extracted challenge directory contains several Windows artifacts that appear unrelated at first glance. Instead of manually opening each file, the investigation begins by extracting every printable string from every artifact.
-
-This mirrors how analysts rapidly triage unknown forensic evidence during Windows incident response.
-
----
-
-## Artifact Inventory
-
-<img src="assets/03_artifact-inventory.png" width="100%" alt="Evidence Inventory"/>
-
-**Figure 3.** Initial evidence inventory after extracting the challenge archive.
-
-### Evidence Collected
-
-<table>
-<tr><th width="220">Artifact</th><th>Purpose During Investigation</th></tr>
-
-<tr>
-<td><code>mappings</code></td>
-<td>Contains Windows mapping information used during investigation.</td>
-</tr>
-
-<tr>
-<td><code>index</code></td>
-<td>Metadata describing stored configuration objects.</td>
-</tr>
-
-<tr>
-<td><code>objects.data</code></td>
-<td>Primary forensic artifact containing encoded configuration data.</td>
-</tr>
-
-<tr>
-<td><code>tools/</code></td>
-<td>Contains ILSpy used for .NET reverse engineering.</td>
-</tr>
-
-</table>
-
----
-
-# 🧪 Evidence Triage Methodology
-
-Rather than guessing which artifact is malicious, investigators enumerate every printable string.
-
-### Investigation Command
+The original investigation used the following command:
 
 ```bash
 strings -a * > strings-encoded.txt
 ```
 
-### Why This Technique?
+### What the command does
 
-The `strings` utility extracts:
+- `strings` extracts printable character sequences from files.
+- `-a` requests scanning of the entire input file rather than relying on particular data sections.
+- `*` supplies the matching entries in the current working directory.
+- `>` redirects the command's output to `strings-encoded.txt`.
 
-* ASCII strings.
-* Unicode strings.
-* Embedded configuration.
-* Executable metadata.
-* PowerShell commands.
-* Registry references.
+### Why it was used
 
-This quickly exposes suspicious artifacts hidden inside binary files.
+Binary forensic artifacts may contain embedded commands, configuration values, executable metadata, paths, or encoded data. Extracting printable strings provides a fast initial triage method before opening each artifact in a specialized parser.
 
----
+### Investigation significance
 
-## DFIR Analyst Note
+The resulting text file becomes a searchable working index of the printable content found in the examined files.
 
-> [!TIP]
-> `strings` is often the fastest way to discover embedded indicators before opening unknown binaries or memory artifacts.
+**Reproducibility note:** The command depends on the current directory and shell glob expansion. The original command is preserved as documented; it should not be interpreted as a recursive inventory of every nested file.
 
-Common discoveries include:
+## Artifact Triage Considerations
 
-* URLs.
-* Registry keys.
-* File paths.
-* Encoded commands.
-* API names.
-* Persistence artifacts.
+The original report identifies the following as useful categories to search for during initial triage:
 
----
+- ASCII and Unicode strings.
+- Executable metadata.
+- PowerShell commands.
+- Registry and configuration references.
+- Embedded paths and URLs.
+- Encoded command-line arguments.
 
-# 🎯 Hunting for PowerShell Activity
+Printable strings are investigative leads, not proof of malicious behavior on their own. Their context must be evaluated against the original artifact and other evidence.
 
-PowerShell is one of the most abused Windows administrative technologies.
+# PowerShell Threat Hunting
 
-Threat hunters typically search for PowerShell before investigating binaries.
+PowerShell is a legitimate Windows administration and automation technology. It is also used by malicious loaders because it can execute scripts, process encoded commands, interact with Windows management interfaces, and load managed assemblies.
 
----
+The investigation searched the extracted strings for PowerShell references.
 
 ## Hunting Command
 
@@ -595,1048 +339,502 @@ Threat hunters typically search for PowerShell before investigating binaries.
 grep -i powershell strings-encoded.txt | sort -u
 ```
 
-### Investigation Goal
+### What the command does
 
-Identify:
+- `grep -i powershell` searches for lines containing `powershell`, without case sensitivity.
+- `sort -u` sorts the matching lines and removes duplicate lines.
 
-* Encoded PowerShell.
-* Hidden execution.
-* WMI references.
-* Base64 payloads.
+### Why it was used
 
----
+The command reduces a potentially large text file to a smaller collection of PowerShell-related leads.
 
-## Screenshot — Suspicious PowerShell Discovery
+### What it revealed
 
-<img src="assets/04_powershell-discovery.png" width="100%" alt="PowerShell Discovery"/>
+The original report records the discovery of a suspicious PowerShell command containing encoded execution and hidden-window indicators.
 
-**Figure 4.** Encoded PowerShell command discovered during artifact hunting.
+<figure>
+  <img src="assets/04_powershell-discovery.png" alt="Suspicious PowerShell reference discovered during artifact hunting">
+  <figcaption>Figure 3. Encoded PowerShell command identified during artifact hunting.</figcaption>
+</figure>
 
----
+## Suspicious Command-Line Indicators
 
-# 🚩 Suspicious Findings
+| Indicator | Interpretation |
+|---|---|
+| `-enc` | Common abbreviation for PowerShell's encoded-command parameter |
+| `-nop` | Common abbreviation for `-NoProfile` |
+| `-Sta` | Selects single-threaded apartment mode |
+| `-Window Hidden` | Requests a hidden window |
+| `cmd.exe /C powershell.exe` | Indicates PowerShell was launched through the Windows command processor |
 
-The recovered PowerShell command contains several suspicious execution switches.
-
-### Indicators Observed
-
-<table>
-<tr><th width="260">Indicator</th><th>Why It Matters</th></tr>
-
-<tr>
-<td><code>-enc</code></td>
-<td>PowerShell executed using Base64 encoded command.</td>
-</tr>
-
-<tr>
-<td><code>-nop</code></td>
-<td>Runs without PowerShell profile loading.</td>
-</tr>
-
-<tr>
-<td><code>-Sta</code></td>
-<td>Single-threaded apartment execution.</td>
-</tr>
-
-<tr>
-<td><code>-Window Hidden</code></td>
-<td>Suppresses visible PowerShell window.</td>
-</tr>
-
-<tr>
-<td><code>cmd.exe /C powershell.exe</code></td>
-<td>PowerShell launched indirectly through command processor.</td>
-</tr>
-
-</table>
-
----
+The combination of encoded content and hidden execution warrants investigation, but these switches are not independently conclusive evidence of malware. They can also appear in legitimate administrative automation.
 
 ## Threat Hunting Observation
 
-> [!WARNING]
-> Encoded PowerShell combined with hidden execution is a common indicator of malicious scripting.
+The original report identifies several possible reasons an attacker might use these mechanisms:
 
-Possible attacker motivations include:
+- Loader execution.
+- Payload staging.
+- Concealed script execution.
+- Defense evasion.
+- Persistence-related activity.
 
-* Fileless malware.
-* Loader execution.
-* Payload staging.
-* Persistence.
-* Defense evasion.
+These are possible interpretations of the observed command-line characteristics, not independently established motives.
 
----
+# PowerShell Loader Analysis
 
-# 🔐 Decoding the PowerShell Loader
+The recovered PowerShell content was decoded offline using CyberChef rather than being executed.
 
-Instead of executing the recovered command, investigators decode it offline using **CyberChef**.
+## Stage 1: Base64 Decoding
 
-This preserves forensic integrity while exposing malware logic.
+<figure>
+  <img src="assets/05_base64-decoding.png" alt="CyberChef Base64 decoding workflow">
+  <figcaption>Figure 4. CyberChef workflow used to decode the recovered PowerShell content.</figcaption>
+</figure>
 
----
-
-## CyberChef Workflow — Stage 1
-
-<img src="assets/05_base64-decoding.png" width="100%" alt="CyberChef Base64 Decoding"/>
-
-**Figure 5.** Decoding the PowerShell loader using CyberChef.
-
----
-
-## Recipe Used
+The documented recipe is:
 
 ```text
 From Base64
-        │
-        ▼
+    |
+    v
 Remove Null Bytes
 ```
 
-### Why Remove Null Bytes?
+### Why remove null bytes?
 
-PowerShell frequently stores commands using **UTF-16** encoding.
+Windows PowerShell command content may be represented using UTF-16LE, where ordinary ASCII-range characters are accompanied by zero-valued bytes.
 
-Removing null bytes converts unreadable Unicode into readable PowerShell syntax.
+Removing those bytes can make the content easier to read when the data is known to use that representation. It is a transformation, however, and should be applied to a working copy rather than treated as a universal decoding rule.
 
----
+## Decoded Loader Logic
 
-# 🧠 Decoded Script Analysis
-
-The decoded PowerShell script reveals a staged loader.
-
-### High-Level Execution Logic
+The original report describes the recovered loader at a high level as follows:
 
 ```text
 Read Configuration
-        │
-        ▼
+        |
+        v
 Decode Base64
-        │
-        ▼
+        |
+        v
 Inflate Binary
-        │
-        ▼
+        |
+        v
 Load Assembly Into Memory
 ```
 
----
+The decoded content reportedly references configuration stored through a WMI-related property.
+
+The reported design avoids a conventional network download during the documented retrieval sequence. This does not establish that the entire program is incapable of network activity; it describes the configuration-retrieval path recorded in the investigation.
 
 ## Analyst Interpretation
 
-Rather than downloading malware from the internet, the loader retrieves configuration directly from Windows Management Instrumentation.
+The investigation identifies several potential benefits of this design from an attacker's perspective:
 
-Advantages include:
+- Configuration can be stored locally.
+- Encoded content is less readable during basic inspection.
+- Compression reduces the stored payload's size.
+- A managed assembly may be loaded without first being written as a conventional executable file.
 
-* Minimal disk artifacts.
-* Offline execution.
-* Smaller payload storage.
-* Reduced signature detection.
+These characteristics can complicate superficial inspection, which is why decoded content, configuration objects, and process telemetry should be correlated.
 
----
+# WMI Configuration Investigation
 
-# 🪟 Windows Management Instrumentation Investigation
+The decoded PowerShell references a property associated in the original report with `Win32_HardwareTelemetry`.
 
-The decoded PowerShell references a suspicious WMI property.
-
-### Investigation Command
+The original hunting command is:
 
 ```bash
 grep -C 3 "Win32_HardwareTelemetry" strings-encoded.txt | sort -u
 ```
 
-This reveals surrounding encoded configuration data.
+### What the command does
 
----
+- `grep -C 3` prints three lines of context before and after each matching line.
+- The search term identifies references to `Win32_HardwareTelemetry`.
+- `sort -u` organizes the matching output and removes duplicate lines.
 
-# Why Investigate WMI?
+### Why it was used
 
-> [!NOTE]
-> WMI is frequently overlooked during basic Windows persistence hunting.
+The surrounding text can help an analyst determine whether the reference is associated with a configuration object, encoded data, or other suspicious content.
 
-Common persistence locations include:
+### Investigation result
 
-* Startup Folder.
-* Run Registry Keys.
-* Scheduled Tasks.
-* Services.
+The original report describes the surrounding artifact content as containing a large encoded configuration blob associated with the payload-recovery sequence.
 
-The malware instead stores configuration inside **Windows Management Instrumentation**.
+<figure>
+  <img src="assets/03_artifact-inventory.png" alt="Forensic artifact inventory used during configuration investigation">
+  <figcaption>Figure 5. Forensic artifact inventory referenced during the WMI configuration investigation.</figcaption>
+</figure>
 
----
+## Reported Configuration Characteristics
 
-## WMI Persistence Workflow
+| Characteristic | Original report's observation |
+|---|---|
+| Configuration reference | `Win32_HardwareTelemetry` |
+| Encoded content | Large Base64 blob |
+| Binary representation | Compressed content |
+| Investigation purpose | Recover the embedded executable |
+| Retrieval path | Local configuration analysis; no network download required for the documented recovery sequence |
 
-```text
-Windows WMI Namespace
-         │
-         ▼
-Configuration Property
-         │
-         ▼
-Encoded Base64 Blob
-         │
-         ▼
-PowerShell Loader
-```
+The available source does not provide a complete WMI namespace, object identifier, class definition, or a full WMI query. Those details are not inferred here.
 
----
+## Important WMI Distinction
 
-## Analyst Findings
+WMI is a legitimate Windows management facility. Its abuse can involve configuration storage, queries, event subscriptions, or other behaviors.
 
-The WMI property contains:
+The original report describes WMI-related configuration storage as a persistence-related finding. However, a custom property or encoded configuration blob alone does not establish a complete WMI event-subscription persistence mechanism.
 
-<table>
-<tr><th width="240">Finding</th><th>Description</th></tr>
+Confirming WMI event-subscription persistence would normally require evidence identifying the relevant filters, consumers, bindings, or equivalent persistence mechanism. The supplied material does not include that complete evidence.
 
-<tr>
-<td>Large Encoded Blob</td>
-<td>High entropy Base64 content.</td>
-</tr>
+# Embedded Payload Recovery
 
-<tr>
-<td>Compressed Configuration</td>
-<td>Binary compressed before storage.</td>
-</tr>
+The original investigation describes a second decoding stage for the encoded configuration blob.
 
-<tr>
-<td>Hidden Payload</td>
-<td>Executable stored inside configuration.</td>
-</tr>
+<figure>
+  <img src="assets/06_deflate-payload.png" alt="CyberChef Raw Inflate workflow for payload recovery">
+  <figcaption>Figure 6. CyberChef Raw Inflate workflow used to recover compressed binary content.</figcaption>
+</figure>
 
-<tr>
-<td>Offline Persistence</td>
-<td>No network retrieval required.</td>
-</tr>
+## Stage 2: Decode and Decompress
 
-</table>
-
----
-
-# 🧬 Why Attackers Abuse WMI
-
-> [!TIP]
-> WMI persistence often survives basic startup inspections.
-
-Benefits for attackers include:
-
-* Hidden storage location.
-* Administrative legitimacy.
-* Difficult manual discovery.
-* PowerShell accessibility.
-* Native Windows technology.
-
----
-
-# 📦 Recovering the Embedded Payload
-
-The Base64 blob recovered from WMI still contains compressed binary content.
-
-CyberChef performs a second decoding stage.
-
----
-
-## CyberChef Workflow — Stage 2
-
-<img src="assets/06_deflate-payload.png" width="100%" alt="Deflate Payload Recovery"/>
-
-**Figure 6.** Recovering compressed executable payload using Raw Inflate.
-
----
-
-## Recipe Chain
+The documented recipe is:
 
 ```text
 From Base64
-        │
-        ▼
+        |
+        v
 Raw Inflate
 ```
 
-### Investigation Goal
+### What the process does
 
-Recover executable bytes stored inside compressed configuration data.
+1. Base64 decoding converts the encoded text into binary bytes.
+2. Raw Inflate attempts to decompress the resulting bytes using a raw DEFLATE stream.
+3. The output can then be inspected to determine whether it represents an executable or another file format.
 
----
+### Why it was used
 
-# 📈 Payload Recovery Pipeline
+The original report identifies the Base64 data as compressed content and records the recovery of a Windows executable through Raw Inflate.
+
+### Payload Recovery Pipeline
 
 ```text
-Encoded WMI Blob
-       │
-       ▼
-Base64 Decode
-       │
-       ▼
-Compressed Bytes
-       │
-       ▼
-Raw Inflate
-       │
-       ▼
-Windows Executable
+Encoded WMI-Related Blob
+          |
+          v
+     Base64 Decode
+          |
+          v
+     Compressed Bytes
+          |
+          v
+      Raw Inflate
+          |
+          v
+   Recovered Binary
+          |
+          v
+     PE Validation
 ```
 
----
+The recovered bytes must be treated as untrusted data. A successful decompression operation alone does not prove that the output is a valid executable.
 
-## Analyst Observation
+# PE Validation and Evidence Preservation
 
-After decompression:
+The recovered binary was examined for recognizable Windows Portable Executable indicators.
 
-* Binary becomes recognizable.
-* DOS executable header appears.
-* Windows executable metadata becomes visible.
+<figure>
+  <img src="assets/07_pe-identification.png" alt="PE identification during payload analysis">
+  <figcaption>Figure 7. Portable Executable identification during static payload analysis.</figcaption>
+</figure>
 
-No malware execution is necessary.
+<figure>
+  <img src="assets/08_pe-filetype-confirmed.png" alt="CyberChef file-type confirmation for the recovered payload">
+  <figcaption>Figure 8. File-type validation of the recovered Windows executable.</figcaption>
+</figure>
 
----
+## Validation Checklist
 
-# 🪟 Portable Executable Identification
+| Validation step | Original report |
+|---|---|
+| DOS `MZ` signature | Reported present |
+| DOS stub | Reported present |
+| Windows PE format | Reported valid |
+| Managed .NET metadata | Reported present |
+| Suitable for static analysis | Reported yes |
+| Malware execution | Not performed |
 
-Recovered payload begins with recognizable Windows executable indicators.
+The `MZ` signature is a useful initial indicator, but it is not sufficient by itself to establish that an entire file is a valid PE. Structural validation should also examine the PE header, section table, and other format-specific fields.
 
----
+The original report records the recovered file as a managed .NET executable.
 
-## Screenshot — PE Detection
+## Preserving the Recovered Sample
 
-<img src="assets/07_pe-identification.png" width="100%" alt="PE Detection"/>
-
-**Figure 7.** Windows Portable Executable signature identified.
-
----
-
-## PE Validation Checklist
-
-<table>
-<tr><th width="220">Validation Step</th><th>Result</th></tr>
-
-<tr>
-<td>MZ Signature</td>
-<td>✅ Present</td>
-</tr>
-
-<tr>
-<td>DOS Stub</td>
-<td>✅ Present</td>
-</tr>
-
-<tr>
-<td>Windows PE Format</td>
-<td>✅ Valid</td>
-</tr>
-
-<tr>
-<td>.NET Metadata</td>
-<td>✅ Managed Assembly</td>
-</tr>
-
-<tr>
-<td>Ready for Static Analysis</td>
-<td>✅ Yes</td>
-</tr>
-
-</table>
-
----
-
-# 🧪 File Type Verification
-
-CyberChef's file detection validates the recovered payload.
-
-<img src="assets/08_pe-filetype-confirmed.png" width="100%" alt="PE Validation"/>
-
-**Figure 8.** CyberChef confirming Windows Portable Executable format.
-
----
-
-## Evidence Validation
-
-<table>
-<tr><th width="240">Attribute</th><th>Observation</th></tr>
-
-<tr>
-<td>File Type</td>
-<td>Windows Portable Executable</td>
-</tr>
-
-<tr>
-<td>Architecture</td>
-<td>.NET Managed Binary</td>
-</tr>
-
-<tr>
-<td>Analysis Method</td>
-<td>Static Only</td>
-</tr>
-
-<tr>
-<td>Execution Performed</td>
-<td>No</td>
-</tr>
-
-</table>
-
----
-
-# 💾 Preserving the Malware Sample
-
-Rather than executing the recovered executable, investigators export it for offline analysis.
-
-### Suggested Filename
+The original report suggests the filename:
 
 ```text
 payload.exe
 ```
 
-### Evidence Preservation Principles
+This is a suggested export filename, not a verified original filename.
 
-* Preserve original bytes.
-* Avoid modification.
-* Avoid execution.
-* Maintain repeatability.
+Evidence-preservation principles include:
 
----
+- Preserve the original evidence files.
+- Export recovered content to a separate working location.
+- Avoid modifying the original artifact.
+- Avoid executing the recovered sample.
+- Record the decoding procedure and transformations applied.
+- Where available, record cryptographic hashes of original and recovered files to support integrity verification.
 
-# 🔒 Static Analysis Principles
+No specific hash is supplied in the original documentation.
 
-> [!IMPORTANT]
-> Malware investigation should begin with **static analysis** whenever possible.
+# .NET Reverse Engineering
 
-### Static Analysis Benefits
+After the executable was recovered, the investigation moved to static analysis with ILSpy.
 
-<table>
-<tr><th width="220">Benefit</th><th>Description</th></tr>
+The original report identifies the recovered sample as a managed .NET assembly. ILSpy was used to inspect the assembly structure and reconstruct readable C# code.
 
-<tr>
-<td>Safe Investigation</td>
-<td>No malware execution required.</td>
-</tr>
+<figure>
+  <img src="assets/09_ilspy-analysis.png" alt="ILSpy workspace used to inspect the recovered .NET assembly">
+  <figcaption>Figure 9. Static reverse engineering of the recovered .NET executable using ILSpy.</figcaption>
+</figure>
 
-<tr>
-<td>Evidence Integrity</td>
-<td>Original artifacts remain unchanged.</td>
-</tr>
+## Why ILSpy?
 
-<tr>
-<td>Behavior Reconstruction</td>
-<td>Execution flow understood from source code.</td>
-</tr>
+| Feature | Investigation purpose |
+|---|---|
+| Assembly Explorer | Inspect namespaces and classes |
+| C# decompiler | Reconstruct readable source-level logic |
+| Entry-point analysis | Identify the reported `Main()` routine |
+| String inspection | Examine embedded configuration values |
+| Metadata inspection | Review managed assembly information |
 
-<tr>
-<td>IOC Recovery</td>
-<td>Extract strings and configuration safely.</td>
-</tr>
+## Reverse-Engineering Workflow
 
-</table>
-
----
-
-# 🧭 Investigation Progress Dashboard
-
-<table>
-<tr><th width="260">Phase</th><th>Status</th></tr>
-
-<tr><td>Evidence Collection</td><td>✅ Completed</td></tr>
-
-<tr><td>Artifact Enumeration</td><td>✅ Completed</td></tr>
-
-<tr><td>PowerShell Threat Hunting</td><td>✅ Completed</td></tr>
-
-<tr><td>CyberChef Base64 Analysis</td><td>✅ Completed</td></tr>
-
-<tr><td>WMI Persistence Discovery</td><td>✅ Completed</td></tr>
-
-<tr><td>Payload Recovery</td><td>✅ Completed</td></tr>
-
-<tr><td>Portable Executable Validation</td><td>✅ Completed</td></tr>
-
-<tr><td>Reverse Engineering</td><td>➡️ Next Phase</td></tr>
-
-</table>
-
----
-
----
-
-<div align="center">
-
-# 🧬 Phase 3 — Reverse Engineering the Malware Payload
-
-### ILSpy • .NET Static Analysis • Malware Behaviour Reconstruction
-
-</div>
-
-> [!IMPORTANT]
-> The recovered executable was analyzed **without execution**. All findings below come from **static reverse engineering** using ILSpy inside the TryHackMe AttackBox environment.
-
----
-
-# 🔎 Reverse Engineering Overview
-
-Once the Windows Portable Executable was recovered, the investigation moved into **static malware analysis**.
-
-Unlike dynamic malware analysis, static analysis allows investigators to understand malware behavior without allowing the payload to execute.
-
-This approach preserves evidence integrity while exposing attacker logic.
-
----
-
-# 🧪 Why ILSpy?
-
-The recovered payload is a **managed .NET assembly**, making ILSpy an ideal reverse engineering tool.
-
-## ILSpy Capabilities Used
-
-<table>
-<tr><th width="260">Feature</th><th>Purpose During Investigation</th></tr>
-
-<tr>
-<td>Assembly Explorer</td>
-<td>Inspect executable namespaces and classes.</td>
-</tr>
-
-<tr>
-<td>C# Decompiler</td>
-<td>Reconstruct readable source code.</td>
-</tr>
-
-<tr>
-<td>Entry Point Analysis</td>
-<td>Identify malware execution routine.</td>
-</tr>
-
-<tr>
-<td>String Viewer</td>
-<td>Recover embedded configuration values.</td>
-</tr>
-
-<tr>
-<td>Metadata Inspection</td>
-<td>Validate managed assembly information.</td>
-</tr>
-
-</table>
-
----
-
-# 🖥 Opening the Payload in ILSpy
-
-<img src="assets/09_ilspy-analysis.png" width="100%" alt="ILSpy Workspace"/>
-
-**Figure 9.** Static analysis of the recovered `.NET` executable using ILSpy.
-
----
-
-## Investigation Workflow
-
-```text id="kb9h44"
+```text
 Recovered payload.exe
-        │
-        ▼
+        |
+        v
 ILSpy Assembly Explorer
-        │
-        ▼
+        |
+        v
 Namespace Discovery
-        │
-        ▼
+        |
+        v
 Program Class
-        │
-        ▼
+        |
+        v
 Main() Entry Point
-        │
-        ▼
-Malware Behaviour Reconstruction
+        |
+        v
+Static Behavior Reconstruction
 ```
 
----
+## Assembly Components Reviewed
 
-# 🧩 Assembly Structure
+| Component | Documented purpose |
+|---|---|
+| Assembly metadata | Inspect executable and managed-assembly information |
+| Namespace | Identify the application's namespace |
+| `Program` class | Review the reported main program logic |
+| `Main()` | Examine the primary entry point |
+| Embedded strings | Investigate encoded configuration values |
 
-The executable contains a small number of managed classes.
+The available report does not provide a complete decompiled source listing, assembly version, cryptographic hash, or full namespace name. These values are not invented.
 
-### Components Reviewed
+# Entry-Point and Behavior Analysis
 
-<table>
-<tr><th width="240">Assembly Component</th><th>Purpose</th></tr>
+The original report records several behaviors identified during static inspection.
 
-<tr>
-<td>Assembly Metadata</td>
-<td>Basic executable information.</td>
-</tr>
+| Stage | Reported observation |
+|---|---|
+| Environment validation | The program checks the Windows machine environment |
+| Conditional execution | Further behavior depends on environment conditions |
+| Process creation | The program constructs a hidden command-execution process |
+| Encoded configuration | The program uses an embedded Base64 value |
 
-<tr>
-<td>Namespace</td>
-<td>Application namespace used by malware.</td>
-</tr>
+## Environment Validation
 
-<tr>
-<td>Program Class</td>
-<td>Main malware logic.</td>
-</tr>
+The report describes checks performed before additional commands are launched.
 
-<tr>
-<td>Main()</td>
-<td>Primary execution routine.</td>
-</tr>
+Possible interpretations include:
 
-<tr>
-<td>Embedded Strings</td>
-<td>Encoded configuration values.</td>
-</tr>
+- Target-environment validation.
+- Conditional execution.
+- Environment fingerprinting.
+- Sandbox avoidance.
 
-</table>
+The available material does not identify the exact environment-checking API, condition, or value. Consequently, the report does not claim that a specific sandbox-detection technique was conclusively identified.
 
----
+## Hidden Process Creation
 
-# 🎯 Entry Point Investigation
+The original report describes a hidden Windows process launched through the command processor.
 
-The `Main()` function controls the malware execution flow.
+| Property | Reported observation |
+|---|---|
+| Parent execution chain | PowerShell loader invokes a hidden command |
+| Executable | Windows command processor |
+| Window visibility | Hidden |
+| User interaction | None expected |
+| Console visibility | Suppressed |
 
-Instead of immediately executing commands, several checks occur first.
+These observations describe the execution logic reconstructed from static analysis. They are not the result of a live execution trace.
 
-## Behaviour Observed
+## Embedded Configuration
 
-<table>
-<tr><th width="240">Stage</th><th>Observation</th></tr>
+The original report intentionally redacts the recovered challenge value.
 
-<tr>
-<td>Environment Validation</td>
-<td>Checks Windows machine environment.</td>
-</tr>
+The sanitized representation is preserved exactly:
 
-<tr>
-<td>Conditional Execution</td>
-<td>Executes payload only if conditions match.</td>
-</tr>
-
-<tr>
-<td>Process Creation</td>
-<td>Builds hidden command execution object.</td>
-</tr>
-
-<tr>
-<td>Encoded Configuration</td>
-<td>Uses embedded Base64 value.</td>
-</tr>
-
-</table>
-
----
-
-# 🧠 Environment Validation
-
-Before launching additional commands, the malware validates the current Windows environment.
-
-## Why Attackers Perform Environment Checks
-
-> [!NOTE]
-> Malware frequently verifies its execution environment to avoid analysis sandboxes and unintended hosts.
-
-Possible goals include:
-
-* Sandbox detection.
-* Target verification.
-* Development testing.
-* Environment fingerprinting.
-* Controlled execution.
-
----
-
-## Defensive Insight
-
-Environment validation is commonly associated with:
-
-* Commodity malware.
-* Red team tooling.
-* Targeted loaders.
-* Advanced persistence mechanisms.
-
-Security analysts should document these checks during reverse engineering.
-
----
-
-# ⚙ Hidden Process Execution
-
-ILSpy reveals the malware creates a hidden Windows process.
-
-## Process Characteristics
-
-<table>
-<tr><th width="240">Property</th><th>Observation</th></tr>
-
-<tr>
-<td>Parent Process</td>
-<td>PowerShell loader invokes hidden command.</td>
-</tr>
-
-<tr>
-<td>Executable</td>
-<td>Windows Command Processor.</td>
-</tr>
-
-<tr>
-<td>Window Visibility</td>
-<td>Hidden.</td>
-</tr>
-
-<tr>
-<td>User Interaction</td>
-<td>None.</td>
-</tr>
-
-<tr>
-<td>Console Window</td>
-<td>Suppressed.</td>
-</tr>
-
-</table>
-
----
-
-## Malware Behaviour Flow
-
-```text id="gvkw2j"
-PowerShell Loader
-        │
-        ▼
-Validate Machine
-        │
-        ▼
-Create Hidden Process
-        │
-        ▼
-Execute Embedded Logic
-```
-
----
-
-# 🔐 Embedded Configuration Analysis
-
-The executable contains an embedded encoded string.
-
-The repository intentionally **redacts** this value.
-
-## Sanitized Representation
-
-```text id="0g7haq"
+```text
 VEhNe1JFREFDVEVEX0ZPUl9QT1JURk9MSU99
 ```
 
-> [!WARNING]
-> The actual decoded challenge value is intentionally omitted from this public repository.
+The source identifies this as an embedded Base64 value and states that the actual decoded challenge value is intentionally omitted from the public repository.
 
----
+| Configuration item | Publication status |
+|---|---|
+| Embedded Base64 value | Recovered during the original investigation |
+| Decoded challenge output | Redacted |
+| Machine-validation value | Documented at a high level |
+| Execution logic | Reconstructed statically |
 
-# 📦 Malware Configuration Storage
+No attempt is made to reconstruct the redacted challenge result.
 
-<table>
-<tr><th width="240">Configuration Item</th><th>Status</th></tr>
+# Malware Execution-Flow Reconstruction
 
-<tr>
-<td>Embedded Base64 Value</td>
-<td>Recovered</td>
-</tr>
+The original report records the following high-level execution chain.
 
-<tr>
-<td>Decoded Challenge Output</td>
-<td>Redacted</td>
-</tr>
-
-<tr>
-<td>Machine Validation Value</td>
-<td>Documented</td>
-</tr>
-
-<tr>
-<td>Execution Logic</td>
-<td>Reconstructed</td>
-</tr>
-
-</table>
-
----
-
-# 🔁 Complete Malware Execution Chain
-
-This investigation reconstructed the malware execution chain from forensic artifacts alone.
-
-```text id="xj0oqj"
-Windows Artifact
-        │
-        ▼
-Encoded PowerShell
-        │
-        ▼
-WMI Configuration
-        │
-        ▼
-Base64 Blob
-        │
-        ▼
-Raw Inflate
-        │
-        ▼
-Portable Executable
-        │
-        ▼
-ILSpy Decompiled Source
-        │
-        ▼
-Hidden Process Execution
-```
-
----
-
-# 🧬 Malware Behaviour Dashboard
-
-<table>
-<tr><th width="260">Capability</th><th>Status</th></tr>
-
-<tr><td>PowerShell Loader</td><td>✅ Observed</td></tr>
-
-<tr><td>Base64 Obfuscation</td><td>✅ Observed</td></tr>
-
-<tr><td>Deflate Compression</td><td>✅ Observed</td></tr>
-
-<tr><td>WMI Configuration Retrieval</td><td>✅ Observed</td></tr>
-
-<tr><td>Memory Assembly Loading</td><td>✅ Observed</td></tr>
-
-<tr><td>Hidden Process Creation</td><td>✅ Observed</td></tr>
-
-<tr><td>Environment Validation</td><td>✅ Observed</td></tr>
-
-<tr><td>Network Download</td><td>❌ Not Required</td></tr>
-
-<tr><td>Registry Persistence</td><td>❌ Not Observed</td></tr>
-
-<tr><td>Scheduled Task Persistence</td><td>❌ Not Observed</td></tr>
-
-</table>
-
----
-
-<div align="center">
-
-# 🎯 MITRE ATT&CK Mapping
-
-### Tactics and Techniques Observed During Investigation
-
+<div class="attack-chain">
+  <div class="attack-step">Windows Artifact</div>
+  <div class="attack-arrow">→</div>
+  <div class="attack-step">Encoded PowerShell</div>
+  <div class="attack-arrow">→</div>
+  <div class="attack-step">WMI-Related Configuration</div>
+  <div class="attack-arrow">→</div>
+  <div class="attack-step">Base64 / Deflate</div>
+  <div class="attack-arrow">→</div>
+  <div class="attack-step">Recovered PE</div>
+  <div class="attack-arrow">→</div>
+  <div class="attack-step">ILSpy Analysis</div>
+  <div class="attack-arrow">→</div>
+  <div class="attack-step">Hidden Process Logic</div>
 </div>
 
----
+The reconstruction combines artifact inspection and static code analysis. It does not imply that every stage was observed through live process telemetry.
 
-## ATT&CK Coverage Matrix
+## Reported Behavior Dashboard
 
-<table>
-<tr><th width="180">Technique</th><th width="120">ID</th><th>Description</th></tr>
+| Capability | Original report |
+|---|---|
+| PowerShell loader | Observed |
+| Base64 obfuscation | Observed |
+| Deflate compression | Observed |
+| WMI-related configuration retrieval | Observed |
+| Memory assembly loading | Reported |
+| Hidden process creation | Reported |
+| Environment validation | Reported |
+| Network download required for documented recovery | No |
+| Registry Run-key persistence | Not observed in the documented investigation |
+| Scheduled-task persistence | Not observed in the documented investigation |
 
-<tr>
-<td>PowerShell</td>
-<td><strong>T1059.001</strong></td>
-<td>Encoded PowerShell used as malware loader.</td>
-</tr>
+**Scope limitation:** “Not observed” means the behavior was not identified in the documented investigation. It does not prove that the mechanism is absent from every part of the target environment.
 
-<tr>
-<td>WMI</td>
-<td><strong>T1047</strong></td>
-<td>Windows Management Instrumentation abused for configuration storage.</td>
-</tr>
+# Indicators of Compromise
 
-<tr>
-<td>Encoded Files</td>
-<td><strong>T1027</strong></td>
-<td>Base64 obfuscation hides malicious configuration.</td>
-</tr>
-
-<tr>
-<td>Deobfuscation</td>
-<td><strong>T1140</strong></td>
-<td>Payload decoded before execution.</td>
-</tr>
-
-<tr>
-<td>Memory Loading</td>
-<td><strong>T1620</strong></td>
-<td>.NET assembly loaded directly into memory.</td>
-</tr>
-
-<tr>
-<td>Process Execution</td>
-<td><strong>T1106</strong></td>
-<td>Hidden Windows process launched programmatically.</td>
-</tr>
-
-<tr>
-<td>Defense Evasion</td>
-<td><strong>T1562</strong></td>
-<td>Hidden execution and encoded commands reduce visibility.</td>
-</tr>
-
-</table>
-
----
-
-# MITRE ATT&CK Kill Chain
-
-```text id="ovp8yl"
-Execution
-    │
-    ▼
-PowerShell Loader
-    │
-    ▼
-Persistence
-(WMI Configuration)
-    │
-    ▼
-Defense Evasion
-(Base64 + Hidden Window)
-    │
-    ▼
-Execution
-(Memory Assembly Loading)
-```
-
----
-
-# 🛡 IOC Dashboard
-
-> [!IMPORTANT]
-> All Indicators of Compromise shown below are **sanitized** for responsible publication.
-
----
+The original report sanitizes indicators for public portfolio publication. The following tables preserve the reported indicator categories without introducing unverified hashes, addresses, domains, or credentials.
 
 ## PowerShell Indicators
 
-<table>
-<tr><th width="260">Indicator</th><th>Description</th></tr>
+| Indicator | Description |
+|---|---|
+| Encoded PowerShell | Base64-encoded command execution |
+| Hidden window | PowerShell launched with hidden-window behavior |
+| No-profile execution | PowerShell profile loading disabled |
+| Memory assembly loading | Reported .NET assembly loading behavior |
 
-<tr>
-<td>Encoded PowerShell</td>
-<td>Base64 encoded command execution.</td>
-</tr>
+## WMI-Related Indicators
 
-<tr>
-<td>Hidden Window</td>
-<td>PowerShell launched invisibly.</td>
-</tr>
+| Indicator | Description |
+|---|---|
+| Custom configuration property | WMI-related configuration reference |
+| Large Base64 blob | Encoded configuration data |
+| Compressed binary content | Embedded data recovered through decompression |
 
-<tr>
-<td>No Profile Execution</td>
-<td>PowerShell profile disabled.</td>
-</tr>
+## Executable Indicators
 
-<tr>
-<td>Memory Assembly Loading</td>
-<td>.NET assembly executed directly from memory.</td>
-</tr>
+| Indicator | Description |
+|---|---|
+| `MZ` header | Recovered content begins with a recognized DOS executable signature |
+| .NET assembly metadata | Recovered binary reported as a managed assembly |
+| Hidden process creation | Process-launch logic identified during static analysis |
+| Embedded Base64 string | Encoded challenge-related configuration |
 
-</table>
+## Sanitized Threat Indicators
 
----
+| Indicator | Portfolio representation |
+|---|---|
+| Recovered flag | `THM{REDACTED_FOR_PORTFOLIO}` |
+| Base64 payload | `BASE64_REDACTED...` |
+| Configuration blob | `CONFIG_DATA_REDACTED` |
+| Embedded secret | `REDACTED` |
 
-## WMI Indicators
+These sanitized values are publication placeholders from the original report. They are not presented as independently recovered IOCs.
 
-<table>
-<tr><th width="260">Indicator</th><th>Description</th></tr>
+# MITRE ATT&CK Mapping
 
-<tr>
-<td>Custom Configuration Property</td>
-<td>Encoded payload stored in WMI.</td>
-</tr>
+The original documentation proposes the following ATT&CK mappings. They are retained as investigation hypotheses, with the evidence limitations made explicit.
 
-<tr>
-<td>Large Base64 Blob</td>
-<td>High entropy configuration data.</td>
-</tr>
+| Technique | ID | Evidence or qualification |
+|---|---|---|
+| PowerShell | [T1059.001](https://attack.mitre.org/techniques/T1059/001/) | Encoded PowerShell command identified in the forensic artifacts |
+| Windows Management Instrumentation | [T1047](https://attack.mitre.org/techniques/T1047/) | WMI-related configuration reference and retrieval behavior described in the report |
+| Obfuscated Files or Information | [T1027](https://attack.mitre.org/techniques/T1027/) | Base64-encoded configuration and compressed payload |
+| Deobfuscate/Decode Files or Information | [T1140](https://attack.mitre.org/techniques/T1140/) | Decoding and decompression were part of the reported loader logic |
+| Reflective Code Loading | [T1620](https://attack.mitre.org/techniques/T1620/) | Original report associates the assembly-loading behavior with memory loading; the exact loading implementation is not included |
+| Native API | [T1106](https://attack.mitre.org/techniques/T1106/) | Proposed in the original report; the supplied evidence does not identify a specific native API call |
+| Impair Defenses | [T1562](https://attack.mitre.org/techniques/T1562/) | Proposed in the original report; hidden execution alone does not establish a specific defense-impairment technique |
 
-<tr>
-<td>Encoded Binary Storage</td>
-<td>Compressed executable hidden in WMI.</td>
-</tr>
+The mappings above should be treated as candidate classifications rather than a fully validated ATT&CK assessment. A final classification should be based on the exact recovered code and the relevant technique definitions.
 
-</table>
+## Reported ATT&CK-Oriented Behavior Sequence
 
----
+```text
+Execution
+    |
+    v
+PowerShell Loader
+    |
+    v
+WMI-Related Configuration Access
+    |
+    v
+Encoded and Compressed Content
+    |
+    v
+Payload Decoding
+    |
+    v
+Reported In-Memory Assembly Loading
+    |
+    v
+Hidden Process-Execution Logic
+```
 
-## Malware Indicators
+This sequence represents the original report's interpretation of the loader and recovered assembly. It is not a claim that every ATT&CK tactic or technique was independently confirmed through runtime telemetry.
 
-<table>
-<tr><th width="260">Indicator</th><th>Description</th></tr>
+# Detection Engineering
 
-<tr>
-<td>MZ Header</td>
-<td>Recovered Windows executable.</td>
-</tr>
+The original investigation includes illustrative Sigma concepts intended to support blue-team hunting.
 
-<tr>
-<td>.NET Assembly Metadata</td>
-<td>Managed executable recovered.</td>
-</tr>
-
-<tr>
-<td>Hidden Process Creation</td>
-<td>Malware executes hidden command processor.</td>
-</tr>
-
-<tr>
-<td>Embedded Base64 String</td>
-<td>Challenge output stored inside executable.</td>
-</tr>
-
-</table>
-
----
-
-# 🚨 Sanitized Threat Indicators
-
-<table>
-<tr><th width="220">IOC</th><th>Portfolio Version</th></tr>
-
-<tr>
-<td>Recovered Flag</td>
-<td><code>THM&#123;REDACTED_FOR_PORTFOLIO&#125;</code></td>
-</tr>
-
-<tr>
-<td>Base64 Payload</td>
-<td><code>BASE64_REDACTED...</code></td>
-</tr>
-
-<tr>
-<td>Configuration Blob</td>
-<td><code>CONFIG_DATA_REDACTED</code></td>
-</tr>
-
-<tr>
-<td>Embedded Secret</td>
-<td><code>REDACTED</code></td>
-</tr>
-
-</table>
-
----
-
-<div align="center">
-
-# 🛡 Detection Engineering
-
-### Sigma Concepts • Sysmon Hunting • Blue Team Visibility
-
-</div>
-
----
-
-# Sigma Detection Opportunities
-
-> [!TIP]
-> These Sigma examples are educational hunting concepts inspired by the investigation.
-
----
+The examples below preserve the original detection logic. They are starting points for investigation, not production-ready detections.
 
 ## Sigma Concept — Encoded PowerShell
 
-```yaml id="ijwnyn"
+```yaml
 title: Suspicious Encoded PowerShell Execution
 
 logsource:
@@ -1655,11 +853,15 @@ condition: selection
 level: high
 ```
 
----
+**Purpose:** Identify process-creation events involving PowerShell and common encoded-command switches.
+
+**Limitations:** This simplified rule requires validation against the organization's log source and Sigma backend. The list under `CommandLine|contains` is intended to match any listed value under standard Sigma modifier semantics. Encoded PowerShell is not inherently malicious, so matching events require investigation.
 
 ## Sigma Concept — Hidden PowerShell Window
 
-```yaml id="mr88pb"
+The original report provides this abbreviated concept:
+
+```yaml
 title: Hidden PowerShell Window
 
 detection:
@@ -1670,11 +872,13 @@ detection:
       - '-sta'
 ```
 
----
+This is a partial detection concept rather than a complete standalone Sigma rule. It lacks a complete `logsource` and `condition`, and the supplied fields must be validated against the intended event schema before deployment.
 
-## Sigma Concept — WMI Configuration Retrieval
+## Sigma Concept — WMI Configuration Access
 
-```yaml id="mlnbwh"
+The original report provides this abbreviated concept:
+
+```yaml
 title: Suspicious WMI Configuration Access
 
 detection:
@@ -1684,596 +888,250 @@ detection:
       - 'ConfigData'
 ```
 
----
+This example is also incomplete as a standalone Sigma rule. It does not define a complete log source or condition, and the `Query` field is not guaranteed to exist in every Windows telemetry source.
+
+A production detection would need to identify the actual event provider, event schema, and WMI behavior being monitored.
 
 # Sysmon Hunting Opportunities
 
-<table>
-<tr><th width="200">Sysmon Event</th><th>Threat Hunting Opportunity</th></tr>
+The original report identifies the following Sysmon event IDs as possible hunting sources.
 
-<tr>
-<td>Event ID 1</td>
-<td>Encoded PowerShell process creation.</td>
-</tr>
+| Event ID | Original hunting objective |
+|---|---|
+| 1 | Investigate process creation and suspicious encoded PowerShell |
+| 7 | Investigate image-load activity relevant to managed-code analysis |
+| 11 | Investigate unexpected file creation |
+| 19–21 | Investigate WMI filter, consumer, and binding activity |
 
-<tr>
-<td>Event ID 7</td>
-<td>Managed .NET assembly loading.</td>
-</tr>
+These event IDs do not provide identical coverage. In particular, Sysmon event IDs 19, 20, and 21 record WMI event-filter registration, event-consumer registration, and filter-to-consumer binding, respectively. They are useful when investigating event-subscription persistence, but they do not automatically capture every WMI query or arbitrary property read.
 
-<tr>
-<td>Event ID 11</td>
-<td>Unexpected executable creation.</td>
-</tr>
-
-<tr>
-<td>Event ID 19–21</td>
-<td>WMI filter and consumer activity.</td>
-</tr>
-
-</table>
-
----
-
-# Threat Hunting Checklist
-
-<table>
-<tr><th width="260">Hunt For</th><th>Why</th></tr>
-
-<tr>
-<td>PowerShell with <code>-EncodedCommand</code></td>
-<td>Common loader behavior.</td>
-</tr>
-
-<tr>
-<td>Hidden PowerShell Windows</td>
-<td>Defense evasion.</td>
-</tr>
-
-<tr>
-<td>cmd.exe spawning PowerShell</td>
-<td>Suspicious parent-child relationship.</td>
-</tr>
-
-<tr>
-<td>Custom WMI Classes</td>
-<td>Persistence hunting.</td>
-</tr>
-
-<tr>
-<td>Large Encoded WMI Properties</td>
-<td>Hidden payload storage.</td>
-</tr>
-
-</table>
-
----
-
----
-
-<div align="center">
-
-# 📸 Investigation Evidence Gallery
-
-### Complete Visual Timeline of the DFIR Investigation
-
-</div>
-
-> [!NOTE]
-> Every screenshot included in this repository has been recreated and sanitized for portfolio publication. Challenge flags, secrets, and sensitive values have been intentionally removed.
-
----
-
-## 🧩 Phase 1 — Investigation Setup
-
-<table>
-<tr>
-<td width="50%" align="center">
-
-### Room Overview
-
-<img src="assets/01_room-overview.png" alt="Room Overview"/>
-
-**Figure 01**
-
-TryHackMe challenge briefing and investigation scenario.
-
-</td>
-
-<td width="50%" align="center">
-
-### AttackBox Workspace
-
-<img src="assets/02_workspace-access.png" alt="Workspace"/>
-
-**Figure 02**
-
-Prepared Linux DFIR investigation environment.
-
-</td>
-</tr>
-</table>
-
----
-
-## 📂 Phase 2 — Evidence Collection
-
-<table>
-<tr>
-<td width="50%" align="center">
-
-### Artifact Inventory
-
-<img src="assets/03_artifact-inventory.png" alt="Artifacts"/>
-
-**Figure 03**
-
-Windows forensic artifacts extracted from evidence package.
-
-</td>
-
-<td width="50%" align="center">
-
-### PowerShell Threat Hunting
-
-<img src="assets/04_powershell-discovery.png" alt="PowerShell Discovery"/>
-
-**Figure 04**
-
-Encoded PowerShell loader discovered during artifact hunting.
-
-</td>
-</tr>
-</table>
-
----
-
-## 🔐 Phase 3 — Payload Recovery
-
-<table>
-<tr>
-<td width="50%" align="center">
-
-### Base64 Decoding Workflow
-
-<img src="assets/05_base64-decoding.png" alt="CyberChef"/>
-
-**Figure 05**
-
-CyberChef decoding encoded PowerShell configuration.
-
-</td>
-
-<td width="50%" align="center">
-
-### Raw Deflate Recovery
-
-<img src="assets/06_deflate-payload.png" alt="Raw Inflate"/>
-
-**Figure 06**
-
-Recovering compressed executable payload.
-
-</td>
-</tr>
-</table>
-
----
-
-## 🪟 Phase 4 — Portable Executable Analysis
-
-<table>
-<tr>
-<td width="50%" align="center">
-
-### PE Header Identification
-
-<img src="assets/07_pe-identification.png" alt="PE Detection"/>
-
-**Figure 07**
-
-Windows Portable Executable identified from recovered payload.
-
-</td>
-
-<td width="50%" align="center">
-
-### File Type Validation
-
-<img src="assets/08_pe-filetype-confirmed.png" alt="PE Validation"/>
-
-**Figure 08**
-
-Recovered payload validated as a managed .NET executable.
-
-</td>
-</tr>
-</table>
-
----
-
-## 🧬 Phase 5 — Reverse Engineering
-
-<table>
-<tr>
-<td width="50%" align="center">
-
-### ILSpy Static Analysis
-
-<img src="assets/09_ilspy-analysis.png" alt="ILSpy"/>
-
-**Figure 09**
-
-Reverse engineering the recovered executable using ILSpy.
-
-</td>
-
-<td width="50%" align="center">
-
-### Embedded Configuration Analysis
-
-<img src="assets/10_encoded-final-stage.png" alt="Encoded Value"/>
-
-**Figure 10**
-
-Investigating embedded Base64 configuration inside the malware.
-
-</td>
-</tr>
-</table>
-
----
-
-## 🚩 Phase 6 — Sanitized Investigation Result
-
-<div align="center">
-
-<img src="assets/11_flag-redacted.png" width="80%" alt="Redacted Flag"/>
-
-### Figure 11 — Final Investigation Result (Sanitized)
-
-**Challenge flag intentionally redacted for responsible publication.**
-
-</div>
-
----
-
-<div align="center">
-
-# 🧠 Digital Forensics Skills Demonstrated
-
-</div>
-
----
-
-## DFIR Competency Dashboard
-
-<table>
-<tr>
-<td width="33%" align="center">
-
-### 🪟 Windows DFIR
-
-Artifact Parsing
-
-WMI Investigation
-
-Persistence Hunting
-
-</td>
-
-<td width="33%" align="center">
-
-### ⚡ PowerShell Analysis
-
-Encoded Commands
-
-UTF-16 Decoding
-
-Memory Loader Analysis
-
-</td>
-
-<td width="33%" align="center">
-
-### 🧬 Malware Analysis
-
-PE Recovery
-
-Static Analysis
-
-Behavior Reconstruction
-
-</td>
-</tr>
-
-<tr>
-<td align="center">
-
-### 🔍 Threat Hunting
-
-IOC Discovery
-
-Artifact Enumeration
-
-WMI Hunting
-
-</td>
-
-<td align="center">
-
-### 🛡 Detection Engineering
-
-Sigma Concepts
-
-Sysmon Hunting
-
-Blue Team Visibility
-
-</td>
-
-<td align="center">
-
-### 📑 Incident Response
-
-Timeline Creation
-
-Evidence Documentation
-
-Defensive Reporting
-
-</td>
-</tr>
-</table>
-
----
-
-# 📊 Investigation Summary Dashboard
-
-<table>
-<tr><th width="260">Investigation Metric</th><th>Result</th></tr>
-
-<tr>
-<td>Evidence Artifacts Reviewed</td>
-<td>4 Windows forensic artifacts</td>
-</tr>
-
-<tr>
-<td>Encoded PowerShell Commands Investigated</td>
-<td>1 Primary Loader</td>
-</tr>
-
-<tr>
-<td>WMI Persistence Objects Reviewed</td>
-<td>Custom Configuration Property</td>
-</tr>
-
-<tr>
-<td>Payloads Recovered</td>
-<td>1 Windows Portable Executable</td>
-</tr>
-
-<tr>
-<td>Malware Executed</td>
-<td>❌ No (Static Analysis Only)</td>
-</tr>
-
-<tr>
-<td>Reverse Engineering Tool</td>
-<td>ILSpy</td>
-</tr>
-
-<tr>
-<td>CyberChef Recipes Applied</td>
-<td>Base64 + Remove Null Bytes + Raw Inflate</td>
-</tr>
-
-<tr>
-<td>Indicators Documented</td>
-<td>PowerShell, WMI, PE, Process Creation</td>
-</tr>
-
-<tr>
-<td>Documentation Produced</td>
-<td>README, Documentation, Notes, GitHub Pages</td>
-</tr>
-
-</table>
-
----
-
-<div align="center">
-
-# 🛡 Defensive Recommendations
-
-</div>
-
-> [!TIP]
-> The techniques observed in this room resemble behaviors commonly monitored by Windows SOC teams and EDR platforms.
-
----
-
-## Windows Hardening Recommendations
-
-<table>
-<tr><th width="260">Recommendation</th><th>Purpose</th></tr>
-
-<tr>
-<td>Enable Script Block Logging</td>
-<td>Capture decoded PowerShell commands.</td>
-</tr>
-
-<tr>
-<td>Enable Module Logging</td>
-<td>Monitor imported PowerShell modules.</td>
-</tr>
-
-<tr>
-<td>Enable Transcription Logging</td>
-<td>Record PowerShell execution history.</td>
-</tr>
-
-<tr>
-<td>Audit WMI Event Consumers</td>
-<td>Detect persistence through WMI.</td>
-</tr>
-
-<tr>
-<td>Monitor Hidden PowerShell Windows</td>
-<td>Identify suspicious execution.</td>
-</tr>
-
-<tr>
-<td>Deploy Sysmon</td>
-<td>Collect process, WMI, and image load telemetry.</td>
-</tr>
-
-</table>
-
----
+Event ID 7 concerns image loading and is not, by itself, proof of .NET assembly loading directly into memory. Event IDs 1 and 11 also require appropriate Sysmon configuration and retention.
 
 ## Threat Hunting Checklist
 
-* [x] Inspect PowerShell Operational Logs.
-* [x] Hunt for `-EncodedCommand`.
-* [x] Investigate hidden PowerShell windows.
-* [x] Review custom WMI namespaces.
-* [x] Search large Base64 configuration blobs.
-* [x] Validate recovered executables before execution.
-* [x] Reverse engineer managed assemblies statically.
+The original investigation's hunting priorities were:
 
----
+- [x] Inspect PowerShell-related artifact content.
+- [x] Search for `-EncodedCommand` indicators.
+- [x] Investigate hidden PowerShell command-line arguments.
+- [x] Examine WMI-related configuration references.
+- [x] Search for large Base64 configuration blobs.
+- [x] Validate recovered executable content before any execution.
+- [x] Inspect the recovered managed assembly statically.
 
-<div align="center">
+The checklist records the documented investigation activities. It does not claim that enterprise endpoint logs were queried or that detections were deployed in production.
 
-# 🚨 MITRE ATT&CK Coverage
+# Investigation Evidence Gallery
 
+The following gallery preserves the screenshot paths referenced in the original document. All paths remain relative to `docs/index.md`.
+
+The original report states that screenshots were recreated and sanitized for portfolio publication, with challenge flags, secrets, and sensitive values removed.
+
+## Phase 1 — Investigation Setup
+
+<figure>
+  <img src="assets/01_room-overview.png" alt="After Hours TryHackMe room overview">
+  <figcaption>Figure 10. TryHackMe challenge briefing and investigation scenario.</figcaption>
+</figure>
+
+<figure>
+  <img src="assets/02_workspace-access.png" alt="AttackBox investigation workspace">
+  <figcaption>Figure 11. Prepared Linux investigation environment.</figcaption>
+</figure>
+
+## Phase 2 — Evidence Collection
+
+<figure>
+  <img src="assets/03_artifact-inventory.png" alt="Extracted forensic artifact inventory">
+  <figcaption>Figure 12. Windows forensic artifacts extracted from the challenge package.</figcaption>
+</figure>
+
+<figure>
+  <img src="assets/04_powershell-discovery.png" alt="PowerShell reference discovered during artifact hunting">
+  <figcaption>Figure 13. Encoded PowerShell loader discovered during artifact hunting.</figcaption>
+</figure>
+
+## Phase 3 — Payload Recovery
+
+<figure>
+  <img src="assets/05_base64-decoding.png" alt="CyberChef Base64 decoding">
+  <figcaption>Figure 14. Base64 decoding of recovered PowerShell configuration.</figcaption>
+</figure>
+
+<figure>
+  <img src="assets/06_deflate-payload.png" alt="CyberChef Raw Inflate payload recovery">
+  <figcaption>Figure 15. Raw Inflate workflow for recovering compressed executable content.</figcaption>
+</figure>
+
+## Phase 4 — Portable Executable Analysis
+
+<figure>
+  <img src="assets/07_pe-identification.png" alt="Recovered PE identification">
+  <figcaption>Figure 16. Windows Portable Executable identification.</figcaption>
+</figure>
+
+<figure>
+  <img src="assets/08_pe-filetype-confirmed.png" alt="Recovered executable file-type validation">
+  <figcaption>Figure 17. File-type validation of the recovered managed executable.</figcaption>
+</figure>
+
+## Phase 5 — Reverse Engineering
+
+<figure>
+  <img src="assets/09_ilspy-analysis.png" alt="ILSpy analysis of the recovered .NET executable">
+  <figcaption>Figure 18. ILSpy static analysis of the recovered .NET executable.</figcaption>
+</figure>
+
+<figure>
+  <img src="assets/10_encoded-final-stage.png" alt="Sanitized embedded configuration analysis">
+  <figcaption>Figure 19. Investigation of embedded Base64 configuration; sensitive challenge output is omitted.</figcaption>
+</figure>
+
+## Phase 6 — Sanitized Investigation Result
+
+<figure>
+  <img src="assets/11_flag-redacted.png" alt="Sanitized final challenge result with flag redacted">
+  <figcaption>Figure 20. Final investigation result with the challenge flag intentionally redacted.</figcaption>
+</figure>
+
+# Key Findings
+
+<div class="key-finding">
+  <div class="key-finding-title">Finding 01 — Encoded PowerShell</div>
+
+  Artifact triage identified a PowerShell execution chain containing encoded-command and hidden-window indicators. The command was investigated through offline decoding rather than direct execution.
 </div>
 
-<table>
-<tr><th width="120">ATT&CK ID</th><th width="220">Technique</th><th>Tactic</th></tr>
+<div class="key-finding">
+  <div class="key-finding-title">Finding 02 — WMI-Related Configuration</div>
 
-<tr>
-<td><strong>T1059.001</strong></td>
-<td>PowerShell</td>
-<td>Execution</td>
-</tr>
-
-<tr>
-<td><strong>T1027</strong></td>
-<td>Obfuscated / Encoded Files</td>
-<td>Defense Evasion</td>
-</tr>
-
-<tr>
-<td><strong>T1140</strong></td>
-<td>Decode / Deobfuscate Files</td>
-<td>Defense Evasion</td>
-</tr>
-
-<tr>
-<td><strong>T1047</strong></td>
-<td>Windows Management Instrumentation</td>
-<td>Execution / Persistence</td>
-</tr>
-
-<tr>
-<td><strong>T1620</strong></td>
-<td>Reflective / Memory Loading</td>
-<td>Execution</td>
-</tr>
-
-<tr>
-<td><strong>T1106</strong></td>
-<td>Native API / Process Creation</td>
-<td>Execution</td>
-</tr>
-
-<tr>
-<td><strong>T1562</strong></td>
-<td>Defense Evasion</td>
-<td>Defense Evasion</td>
-</tr>
-
-</table>
-
----
-
-<div align="center">
-
-# 📚 Repository Documentation
-
+  The original report associates a configuration reference identified as `Win32_HardwareTelemetry` with a large encoded blob. The supplied evidence does not establish the full WMI namespace, object structure, or a complete event-subscription persistence mechanism.
 </div>
 
-<table>
-<tr>
-<td width="33%" align="center">
+<div class="key-finding">
+  <div class="key-finding-title">Finding 03 — Embedded Executable Recovery</div>
 
-## 📄 README
-
-Project overview
-
-Badges
-
-Repository structure
-
-Learning objectives
-
-</td>
-
-<td width="33%" align="center">
-
-## 📘 Documentation
-
-Complete forensic report
-
-Malware analysis
-
-IOC tables
-
-Timeline
-
-</td>
-
-<td width="33%" align="center">
-
-## 📝 Notes
-
-Commands
-
-Investigation notebook
-
-CyberChef workflow
-
-Quick IOC reference
-
-</td>
-</tr>
-</table>
-
----
-
-<div align="center">
-
-# 🗂 Repository Structure
-
+  The report records successful Base64 decoding and Raw Inflate decompression, followed by identification of Windows PE and managed .NET indicators.
 </div>
 
-```text id="5uhutx"
+<div class="key-finding">
+  <div class="key-finding-title">Finding 04 — Static Behavior Reconstruction</div>
+
+  ILSpy was used to inspect the managed assembly, the `Program` class, the `Main()` entry point, environment-validation logic, embedded configuration, and hidden process-execution behavior.
+</div>
+
+<div class="key-finding">
+  <div class="key-finding-title">Finding 05 — Defensive Hunting Opportunities</div>
+
+  The documented behavior suggests investigation opportunities involving PowerShell process creation, encoded command-line arguments, WMI-related activity, executable recovery, and process telemetry.
+</div>
+
+# Defensive Recommendations
+
+The recommendations below are derived from the behaviors described in the original report.
+
+| Finding | Security risk | Recommended control |
+|---|---|---|
+| Encoded PowerShell execution | Script behavior may be difficult to assess from a superficial command-line review | Enable and centralize appropriate PowerShell logging, including Script Block Logging |
+| Hidden PowerShell execution | Suspicious activity may receive less attention during manual investigation | Correlate command-line arguments with process ancestry, user context, and endpoint alerts |
+| WMI-related configuration | Nonstandard configuration or persistence-related activity may be overlooked | Inventory WMI namespaces and objects, and investigate unexpected event subscriptions |
+| Encoded and compressed payloads | Static signatures may not reveal the content before decoding | Preserve evidence and inspect decoded artifacts using controlled static-analysis procedures |
+| Recovered executable | Executing an untrusted sample can change the environment or activate harmful behavior | Validate file structure and hashes, preserve the sample, and avoid execution on analyst workstations |
+| Reported in-memory assembly loading | Traditional file-creation monitoring may not reveal every stage | Correlate process, script, image-load, and other available endpoint telemetry |
+| Hidden child-process creation | Unusual process relationships may be missed when examining isolated events | Monitor process ancestry and suspicious combinations of parent image, child image, and command line |
+
+## Windows Logging and Monitoring
+
+The original report recommends the following controls:
+
+- Enable PowerShell Script Block Logging.
+- Enable PowerShell Module Logging.
+- Enable PowerShell Transcription Logging where appropriate.
+- Audit WMI event filters, consumers, and bindings.
+- Monitor suspicious hidden PowerShell processes.
+- Deploy and configure Sysmon for relevant process, file, image-load, and WMI telemetry.
+
+Logging should be configured with appropriate access controls, retention, and privacy considerations. Telemetry collection alone does not prevent execution; detections and incident-response procedures are also required.
+
+# Investigation Summary
+
+| Metric | Original report |
+|---|---|
+| Forensic artifact names documented | `mappings`, `index`, `objects.data`, `tools/` |
+| Primary PowerShell loader | 1 reported |
+| WMI-related configuration reference | Custom property associated with `Win32_HardwareTelemetry` |
+| Recovered executable | 1 Windows PE reported |
+| Static reverse-engineering tool | ILSpy |
+| CyberChef operations | From Base64, Remove Null Bytes, Raw Inflate |
+| Malware execution | Not performed during the documented investigation |
+| IOC categories | PowerShell, WMI-related configuration, PE, process creation |
+| Detection concepts | Sigma and Sysmon hunting opportunities |
+| Public challenge result | Intentionally redacted |
+
+The metric values above reflect the original report. The underlying evidence files were not independently re-examined as part of this documentation transformation.
+
+# Lessons Learned
+
+## 1. Start with Broad Artifact Triage
+
+Extracting printable strings can quickly identify promising leads in binary evidence. The results should be treated as an index for further investigation rather than a substitute for format-aware forensic analysis.
+
+## 2. Treat Encoded Commands as Evidence
+
+Encoded PowerShell should be decoded in a controlled workflow before its behavior is assessed. Hidden-window and encoded-command switches are useful hunting indicators but require context.
+
+## 3. Investigate Beyond Conventional Persistence Locations
+
+The original investigation moved from familiar Windows startup mechanisms to a WMI-related configuration reference. This illustrates why Windows investigations should consider multiple storage and execution mechanisms.
+
+## 4. Validate Every Payload-Recovery Stage
+
+Base64 decoding, decompression, and file-format validation are separate steps. Each transformation should be recorded so the analyst can reproduce the recovery process.
+
+## 5. Use Static Reverse Engineering Before Execution
+
+ILSpy provided a way to inspect the recovered managed assembly without intentionally running the sample. Static findings should be distinguished from behaviors observed during a controlled dynamic-analysis session.
+
+## 6. Distinguish Observations from Conclusions
+
+An encoded blob, a hidden process configuration, and a WMI reference are useful findings. Stronger claims about persistence, sandbox evasion, or defense impairment require evidence specific to those behaviors.
+
+## 7. Turn Findings into Defensive Questions
+
+The investigation identified practical areas for blue-team review: encoded PowerShell, process ancestry, WMI activity, executable recovery, and available endpoint telemetry.
+
+# Repository Documentation
+
+The original project describes a broader repository containing the main README, a detailed forensic report, analyst notes, screenshots, and supporting repository files.
+
+## Documentation Map
+
+| Resource | Documented purpose |
+|---|---|
+| `README.md` | Repository overview, badges, project summary, and learning objectives |
+| `Documentation/Documentation.md` | Detailed forensic investigation report |
+| `Documentation/Documentation.docx` | Word-format report |
+| `Resources/notes.md` | Commands, observations, and IOC notebook |
+| `SECURITY.md` | Security-related repository guidance |
+| `CONTRIBUTING.md` | Contribution guidance |
+| `LICENSE` | Repository license file |
+| `docs/index.md` | GitHub Pages portfolio report |
+
+## Original Repository Structure
+
+The original report records this project structure:
+
+```text
 After-Hours-TryHackMe-Walkthrough/
-│
 ├── README.md
 ├── SECURITY.md
 ├── CONTRIBUTING.md
 ├── LICENSE
-│
 ├── Documentation/
 │   ├── Documentation.md
 │   └── Documentation.docx
-│
 ├── Resources/
 │   └── notes.md
-│
 ├── Screenshots/
 │   ├── 01_room-overview.png
 │   ├── 02_workspace-access.png
@@ -2286,244 +1144,79 @@ After-Hours-TryHackMe-Walkthrough/
 │   ├── 09_ilspy-analysis.png
 │   ├── 10_encoded-final-stage.png
 │   └── 11_flag-redacted.png
-│
 └── docs/
     ├── index.md
     └── assets/
         ├── 01_room-overview.png
-        ├── ...
-        └── custom.scss
+        ├── 02_workspace-access.png
+        ├── 03_artifact-inventory.png
+        ├── 04_powershell-discovery.png
+        ├── 05_base64-decoding.png
+        ├── 06_deflate-payload.png
+        ├── 07_pe-identification.png
+        ├── 08_pe-filetype-confirmed.png
+        ├── 09_ilspy-analysis.png
+        ├── 10_encoded-final-stage.png
+        └── 11_flag-redacted.png
 ```
 
----
+The structure above documents the layout described by the source report. It does not assert that every listed file currently exists in the repository.
 
-<div align="center">
+# Related Portfolio Projects
 
-# 🎓 What I Learned
+The original report identifies the following related projects and focus areas.
 
-</div>
+| Project | Focus area |
+|---|---|
+| Infinity Pool | Linux privilege escalation |
+| CryptoCabana | Web application security |
+| Do Not Disturb | Linux enumeration and privilege escalation |
+| SuperSecretTip | Web exploitation |
+| Valenfind | Local File Inclusion and enumeration |
+| Corp Website | Web security and initial access |
+| Active Directory Basics | Windows Active Directory fundamentals |
 
-<table>
-<tr><th width="260">Security Domain</th><th>Practical Experience</th></tr>
+# References and Learning Resources
 
-<tr>
-<td>Windows Forensics</td>
-<td>Artifact triage, WMI inspection, persistence hunting.</td>
-</tr>
+The original documentation names the following resources. Only the MITRE ATT&CK references above were supplied with explicit URLs in the source material's technique identifiers; the other resource names are preserved without inventing destination links.
 
-<tr>
-<td>PowerShell Security</td>
-<td>Encoded command recovery and analysis.</td>
-</tr>
+| Resource | Purpose |
+|---|---|
+| TryHackMe — After Hours | Original training room |
+| CyberChef | Encoded-data transformation and payload recovery |
+| ILSpy | .NET assembly inspection and decompilation |
+| MITRE ATT&CK Framework | Classification of adversary behaviors |
+| Microsoft Sysmon documentation | Windows telemetry and threat-hunting reference |
+| Sigma rule specification | Detection-rule structure and detection-engineering concepts |
 
-<tr>
-<td>Malware Analysis</td>
-<td>Payload extraction and PE validation.</td>
-</tr>
+# Responsible Use
 
-<tr>
-<td>Reverse Engineering</td>
-<td>.NET assembly inspection using ILSpy.</td>
-</tr>
+This documentation was created for authorized cybersecurity training and CTF environments. Techniques described here should only be used against systems for which you have explicit permission to test.
 
-<tr>
-<td>Threat Hunting</td>
-<td>IOC extraction and detection opportunities.</td>
-</tr>
+Recovered executables and encoded payloads must be treated as untrusted. Do not execute samples on personal or production systems. Preserve evidence, follow applicable lab rules, and use controlled analysis environments.
 
-<tr>
-<td>Incident Documentation</td>
-<td>Professional DFIR reporting workflow.</td>
-</tr>
+Challenge flags, decoded challenge values, and sensitive embedded values intentionally remain redacted in this public portfolio report.
 
-</table>
+# Conclusion
 
----
+The After Hours investigation documents a static-first workflow for examining suspicious Windows artifacts, identifying encoded PowerShell execution, investigating WMI-related configuration data, recovering a compressed PE, and reconstructing reported .NET execution logic through ILSpy.
 
-<div align="center">
+The main technical value of the exercise is the progression from broad artifact triage to targeted decoding, executable validation, reverse engineering, indicator documentation, and defensive hunting recommendations.
 
-# 🌐 Related Portfolio Projects
+The report also demonstrates the importance of evidence integrity and careful interpretation: observed artifact characteristics should be distinguished from inferred attacker intent, and proposed ATT&CK mappings should be validated against the recovered implementation.
 
-</div>
+The resulting case study presents practical work across Windows DFIR, PowerShell analysis, payload recovery, managed-code reverse engineering, and blue-team detection concepts.
 
-<table>
-<tr><th width="260">Repository</th><th>Focus Area</th></tr>
+<div class="ctf-footer">
 
-<tr>
-<td>Infinity Pool</td>
-<td>Linux Privilege Escalation</td>
-</tr>
+  <strong>CYBERSECURITY CTF PORTFOLIO</strong>
 
-<tr>
-<td>CryptoCabana</td>
-<td>Web Application Security</td>
-</tr>
+  <br>
 
-<tr>
-<td>Do Not Disturb</td>
-<td>Linux Enumeration & Privilege Escalation</td>
-</tr>
+  Research • Practice • Detection • Defense
 
-<tr>
-<td>SuperSecretTip</td>
-<td>Web Exploitation</td>
-</tr>
+  <br><br>
 
-<tr>
-<td>Valenfind</td>
-<td>Local File Inclusion & Enumeration</td>
-</tr>
-
-<tr>
-<td>Corp Website</td>
-<td>Web Security & Initial Access</td>
-</tr>
-
-<tr>
-<td>Active Directory Basics</td>
-<td>Windows Active Directory Fundamentals</td>
-</tr>
-
-</table>
-
----
-
-<div align="center">
-
-# ⚠ Responsible Disclosure
-
-</div>
-
-> [!WARNING]
-> This GitHub repository intentionally omits challenge secrets.
-
-### Redacted From Publication
-
-<table>
-<tr><th width="260">Item</th><th>Status</th></tr>
-
-<tr>
-<td>TryHackMe Flag</td>
-<td>🔒 Redacted</td>
-</tr>
-
-<tr>
-<td>Decoded Secret Value</td>
-<td>🔒 Redacted</td>
-</tr>
-
-<tr>
-<td>Embedded Challenge Credentials</td>
-<td>🔒 Redacted</td>
-</tr>
-
-<tr>
-<td>Reusable Payload Secrets</td>
-<td>🔒 Redacted</td>
-</tr>
-
-</table>
-
-The purpose of this repository is to demonstrate:
-
-* Investigation methodology.
-* Malware analysis workflow.
-* Windows forensic techniques.
-* Defensive security knowledge.
-
----
-
-<div align="center">
-
-# 📖 References & Learning Resources
-
-</div>
-
-<table>
-<tr><th width="260">Resource</th><th>Purpose</th></tr>
-
-<tr>
-<td>TryHackMe — After Hours</td>
-<td>Original training room.</td>
-</tr>
-
-<tr>
-<td>CyberChef</td>
-<td>Offline payload decoding.</td>
-</tr>
-
-<tr>
-<td>ILSpy</td>
-<td>.NET reverse engineering.</td>
-</tr>
-
-<tr>
-<td>MITRE ATT&CK Framework</td>
-<td>Threat behavior mapping.</td>
-</tr>
-
-<tr>
-<td>Microsoft Sysmon Documentation</td>
-<td>Threat hunting telemetry.</td>
-</tr>
-
-<tr>
-<td>Sigma Rule Specification</td>
-<td>Detection engineering concepts.</td>
-</tr>
-
-</table>
-
----
-
-<div align="center">
-
-# 👨‍💻 Author
-
-## Anurag Revankar 
-
-### Cybersecurity • Digital Forensics • Malware Analysis • Threat Hunting
-
-Building practical cybersecurity labs, DFIR investigations, malware analysis reports, and professional CTF documentation through hands-on learning and portfolio-driven projects.
-
----
-
-**Portfolio Focus Areas**
-
-🛡 Digital Forensics
-
-🔬 Malware Analysis
-
-⚡ Reverse Engineering
-
-🪟 Windows Security
-
-☁ Cloud & Network Security
-
-🎯 Blue Team Operations
-
-📚 TryHackMe Documentation Projects
-
----
-
-*"Turning hands-on cybersecurity investigations into professional documentation and portfolio-ready case studies."*
-
-</div>
-
----
-
-<div align="center">
-
-# 🌙 AFTER HOURS — INVESTIGATION COMPLETE
-
-<img src="assets/11_flag-redacted.png" width="70%" alt="Investigation Complete"/>
-
-## Windows Digital Forensics • Malware Analysis • Reverse Engineering
-
-**Hacker Holidays 2026 — Day 12**
-
-**Professional GitHub Pages Documentation**
-
-⭐ *Built for cybersecurity recruiters, DFIR portfolios, and malware analysis learning.*
+  © Anurag R.
 
 </div>
