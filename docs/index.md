@@ -1,20 +1,3 @@
-
----
-layout: default
-title: "After Hours — Windows DFIR & Malware Analysis"
-description: "A TryHackMe Windows digital forensics investigation covering PowerShell threat hunting, WMI configuration analysis, encoded payload recovery, PE validation, .NET reverse engineering, and defensive detection engineering."
-category: "Digital Forensics & Incident Response"
-tags:
-  - TryHackMe
-  - Windows-DFIR
-  - PowerShell
-  - WMI
-  - Malware-Analysis
-  - Reverse-Engineering
-  - Threat-Hunting
-  - Blue-Team
----
-
 <div class="ctf-hero">
 
   <h1>AFTER HOURS</h1>
@@ -103,44 +86,44 @@ The investigation follows a static-first Digital Forensics and Incident Response
 | Detection engineering | Documented Sigma concepts and Sysmon hunting opportunities |
 | Reporting | Recorded indicators, analysis steps, ATT&CK mappings, and defensive recommendations |
 
-## Navigation
+<h2 id="navigation">Navigation</h2>
 
 <div class="ctf-toc">
+  <div class="ctf-toc-title">Documentation Map</div>
 
-<div class="ctf-toc-title">Documentation Map</div>
-
-- [Mission](#mission)
-- [Quick Overview](#quick-overview)
-- [Investigation Objectives](#investigation-objectives)
-- [Scope and Safe Analysis](#scope-and-safe-analysis)
-- [Lab Environment](#lab-environment)
-- [Tools and Technologies](#tools-and-technologies)
-- [Investigation Methodology](#investigation-methodology)
-- [Investigation Timeline](#investigation-timeline)
-- [Evidence Acquisition](#evidence-acquisition)
-- [Artifact Enumeration](#artifact-enumeration)
-- [PowerShell Threat Hunting](#powershell-threat-hunting)
-- [PowerShell Loader Analysis](#powershell-loader-analysis)
-- [WMI Configuration Investigation](#wmi-configuration-investigation)
-- [Embedded Payload Recovery](#embedded-payload-recovery)
-- [PE Validation and Evidence Preservation](#pe-validation-and-evidence-preservation)
-- [.NET Reverse Engineering](#net-reverse-engineering)
-- [Malware Execution-Flow Reconstruction](#malware-execution-flow-reconstruction)
-- [Indicators of Compromise](#indicators-of-compromise)
-- [MITRE ATT&CK Mapping](#mitre-attck-mapping)
-- [Detection Engineering](#detection-engineering)
-- [Sysmon Hunting Opportunities](#sysmon-hunting-opportunities)
-- [Investigation Evidence Gallery](#investigation-evidence-gallery)
-- [Key Findings](#key-findings)
-- [Defensive Recommendations](#defensive-recommendations)
-- [Investigation Summary](#investigation-summary)
-- [Lessons Learned](#lessons-learned)
-- [Repository Documentation](#repository-documentation)
-- [Related Portfolio Projects](#related-portfolio-projects)
-- [References and Learning Resources](#references-and-learning-resources)
-- [Responsible Use](#responsible-use)
-- [Conclusion](#conclusion)
-
+  <ul>
+    <li><a href="#mission">Mission</a></li>
+    <li><a href="#quick-overview">Quick Overview</a></li>
+    <li><a href="#investigation-objectives">Investigation Objectives</a></li>
+    <li><a href="#scope-and-safe-analysis">Scope and Safe Analysis</a></li>
+    <li><a href="#lab-environment">Lab Environment</a></li>
+    <li><a href="#tools-and-technologies">Tools and Technologies</a></li>
+    <li><a href="#investigation-methodology">Investigation Methodology</a></li>
+    <li><a href="#investigation-timeline">Investigation Timeline</a></li>
+    <li><a href="#evidence-acquisition">Evidence Acquisition</a></li>
+    <li><a href="#artifact-enumeration">Artifact Enumeration</a></li>
+    <li><a href="#powershell-threat-hunting">PowerShell Threat Hunting</a></li>
+    <li><a href="#powershell-loader-analysis">PowerShell Loader Analysis</a></li>
+    <li><a href="#wmi-configuration-investigation">WMI Configuration Investigation</a></li>
+    <li><a href="#embedded-payload-recovery">Embedded Payload Recovery</a></li>
+    <li><a href="#pe-validation-and-evidence-preservation">PE Validation and Evidence Preservation</a></li>
+    <li><a href="#net-reverse-engineering">.NET Reverse Engineering</a></li>
+    <li><a href="#malware-execution-flow-reconstruction">Malware Execution-Flow Reconstruction</a></li>
+    <li><a href="#indicators-of-compromise">Indicators of Compromise</a></li>
+    <li><a href="#mitre-attck-mapping">MITRE ATT&amp;CK Mapping</a></li>
+    <li><a href="#detection-engineering">Detection Engineering</a></li>
+    <li><a href="#sysmon-hunting-opportunities">Sysmon Hunting Opportunities</a></li>
+    <li><a href="#investigation-evidence-gallery">Investigation Evidence Gallery</a></li>
+    <li><a href="#key-findings">Key Findings</a></li>
+    <li><a href="#defensive-recommendations">Defensive Recommendations</a></li>
+    <li><a href="#investigation-summary">Investigation Summary</a></li>
+    <li><a href="#lessons-learned">Lessons Learned</a></li>
+    <li><a href="#repository-documentation">Repository Documentation</a></li>
+    <li><a href="#related-portfolio-projects">Related Portfolio Projects</a></li>
+    <li><a href="#references-and-learning-resources">References and Learning Resources</a></li>
+    <li><a href="#responsible-use">Responsible Use</a></li>
+    <li><a href="#conclusion">Conclusion</a></li>
+  </ul>
 </div>
 
 # Investigation Objectives
@@ -1207,16 +1190,3 @@ The report also demonstrates the importance of evidence integrity and careful in
 
 The resulting case study presents practical work across Windows DFIR, PowerShell analysis, payload recovery, managed-code reverse engineering, and blue-team detection concepts.
 
-<div class="ctf-footer">
-
-  <strong>CYBERSECURITY CTF PORTFOLIO</strong>
-
-  <br>
-
-  Research • Practice • Detection • Defense
-
-  <br><br>
-
-  © Anurag R.
-
-</div>
